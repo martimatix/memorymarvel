@@ -35,6 +35,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Faster than webrick and is multithreaded
 gem 'puma'
 
+# Required for json serialization
+gem 'responders', '~> 2.0'
+
 gem 'rails_12factor', group: :production
 
 group :development do
