@@ -4,6 +4,7 @@ class CreateComics < ActiveRecord::Migration
       t.integer :marvel_id
       t.string  :title
       t.string  :image_url 
+      t.integer :deck_id
       t.timestamps
     end
   end

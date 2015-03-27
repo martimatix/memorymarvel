@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20150327005920) do
     t.integer  "marvel_id"
     t.string   "title"
     t.string   "image_url"
+    t.integer  "deck_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -27,6 +28,7 @@ ActiveRecord::Schema.define(version: 20150327005920) do
   create_table "decks", force: :cascade do |t|
     t.string   "title"
     t.integer  "num_comics", default: 0
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
