@@ -6,12 +6,28 @@ app.SearchResultsView = Backbone.View.extend({
   el: '#main', // define the selector which this view is associated with
   render: function () {
 
-    var deckViewHTML = $('#searchResultsView-template').html();
-    this.$el.html(deckViewHTML);
+    var searchResultsViewHTML = $('#searchResultsView-template').html();
+    this.$el.html(searchResultsViewHTML);
 
-    this.collection.each(function (deck) {
-      var deckListView = new app.DeckListView({model: deck});
-      deckListView.render();
+    self = this;
+    this.searchMarvel().then(function (result){
+      for (var i = 0; i < result.data.results.length; i++) {
+        var image_path = result.data.results[i].thumbnail.path;
+        console.log(image_path);
+        self.$el.append('<img src="' + image_path + '/portrait_xlarge.jpg">');
+      };
+    });
+  },
+
+  searchMarvel: function () {
+    var marvelUrl = 'http://gateway.marvel.com:80/v1/public/comics?';
+
+    return $.getJSON(marvelUrl, {
+      format: 'comic',
+      formatType: 'comic',
+      noVariants: 'true',
+      titleStartsWith: 'x-men',
+      apikey: 'e05840ef82f3caa5b3e1483b2a7b9d11'
     });
   }
 });
