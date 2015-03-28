@@ -10,7 +10,11 @@ class Api::ComicsController < ApplicationController
   end
 
   def create
-    respond_with :api, Comic.create(comic_params)
+    comic = Comic.create comic_params
+    # establish associations
+    deck = Deck.find_by :id => comic_params[:deck_id]
+    deck.comics << comic
+    render :json => comic
   end
 
   def update
@@ -28,7 +32,7 @@ class Api::ComicsController < ApplicationController
   end
 
   def comic_params
-    params.require(:comic).permit(:marvel_id, :title, :image_url)
+    params.require(:comic).permit(:deck_id, :marvel_id, :title, :image_url)
   end
 
 end
