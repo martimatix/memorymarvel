@@ -2,7 +2,7 @@ var app = app || {};
 
 app.Comics = Backbone.Collection.extend({
   url: function () {
-    return '/decks/' + this.deckID + '/comics';
+    return 'api/decks/' + this.deckID + '/comics';
   },
   model: app.Comic,
   initialize: function (options) {

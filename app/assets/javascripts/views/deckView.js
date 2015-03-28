@@ -9,7 +9,7 @@ app.DeckView = Backbone.View.extend({
     var deckViewHTML = $('#deckView-template').html();
     this.$el.html(deckViewHTML);
 
-    this.collection.each(function (flight) {
+    this.collection.each(function (deck) {
       var deckListView = new app.DeckListView({model: deck});
       deckListView.render();
     });
