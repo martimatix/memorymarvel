@@ -3,8 +3,9 @@ Rails.application.routes.draw do
 
   namespace :api do
     resources :users
-    resources :decks
-    resources :comics
+    resources :decks do
+      resources :comics
+    end
     resources :favourites
   end
 

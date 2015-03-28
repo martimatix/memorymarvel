@@ -11,5 +11,5 @@
 
 class Favourite < ActiveRecord::Base
   belongs_to :user
-  has_one :deck
+  belongs_to :deck
 end

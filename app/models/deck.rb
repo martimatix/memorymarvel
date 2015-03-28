@@ -13,5 +13,5 @@
 class Deck < ActiveRecord::Base
   belongs_to :user
   has_and_belongs_to_many :comics
-  belongs_to :favourite
+  has_many :favourites
 end

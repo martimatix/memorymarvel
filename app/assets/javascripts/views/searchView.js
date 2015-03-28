@@ -40,6 +40,13 @@ app.SearchView = Backbone.View.extend({
 
   addComicToDeck: function(event) {
     var counter = $(event.target).attr('data-counter') // counter is the position in this.responseJSON
-    console.log(this.responseJSON[counter]);
+    var comicInfoObject = this.responseJSON[counter]);
+    var newComic = new app.Comic({
+      marvel_id: comicInfoObject.id,
+      title: comicInfoObject.title,
+      image_url: comicInfoObject.thumbnail.path,
+      deck_id: this.model.get('id')
+    });
+    newComic.save();
   }
 });

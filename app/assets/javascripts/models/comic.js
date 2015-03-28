@@ -4,7 +4,7 @@ var app = app || {};
 
 app.Comic = Backbone.Model.extend({
   urlRoot: function () {
-    return '/decks/' + this.get('deck_id') + '/comics';
+    return '/api/decks/' + this.get('deck_id') + '/comics';
   },
   defaults: {
     marvel_id: 0,
