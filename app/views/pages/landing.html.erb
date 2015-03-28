@@ -2,32 +2,21 @@
 
   <div id="main"></div>
 
-  <template id="flightView-template">
-    <h2>All Scheduled Flights</h2>
+  <template id="deckView-template">
+    <h2>Available Decks</h2>
     <table>
       <tr>
-        <th>Origin</th>
-        <th>Destination</th>
-        <th>Flight Number</th>
-        <th>Date</th>
+        <th>Title</th>
+        <th>Number of comics</th>
       </tr>
-      <tbody id="flights_table_data"></tbody>
+      <tbody id="decks_table_data"></tbody>
     </table>
   </template>
 
-  <template id="flightListView-template">
-      <td>{{ origin }}</td>
-      <td>{{ destination }}</td>
-      <td>{{ flight_num }}</td>
-      <td>{{ date }}</td>
+  <template id="deckListView-template">
+      <td>{{ title }}</td>
+      <td>{{ num_comics }}</td>
   </template>
-
-  <template id="reservationView-template">
-    <h2>Create Reservation</h2>
-      <div id="airplane">
-      </div>
-  </template>
-
 
 
 

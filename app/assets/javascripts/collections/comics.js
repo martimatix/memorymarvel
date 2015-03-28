@@ -6,7 +6,7 @@ app.Comics = Backbone.Collection.extend({
   },
   model: app.Comic,
   initialize: function (options) {
-    this.flightID = options.flight_id;
+    this.comicID = options.comic_id;
     // this.on('add', function (comment) {
     //   var commentView = new app.CommentView({model: comment});
     //   commentView.render();

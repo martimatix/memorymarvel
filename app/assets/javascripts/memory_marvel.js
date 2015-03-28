@@ -1,6 +1,6 @@
 var app = app || {};
 
-app.flights = new app.Flights();
+app.decks = new app.Decks();
 app.users = new app.Users();
 app.currentUser = new app.CurrentUser();
 
