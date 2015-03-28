@@ -8,8 +8,8 @@ app.Comic = Backbone.Model.extend({
   },
   defaults: {
     marvel_id: 0,
-    seat_column: 'not selected',
-    user_id: 0,
-    flight_id: 0
+    title: 'no title',
+    image_url: 'no image'
+    deck_id: 0
   }
 });

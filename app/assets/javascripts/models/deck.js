@@ -5,6 +5,7 @@ var app = app || {};
 app.Deck = Backbone.Model.extend({
   defaults: {
     title: 'New Deck',
-    num_comics: 0
+    num_comics: 0,
+    user_id: 0
   }
 });

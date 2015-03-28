@@ -6,6 +6,7 @@
 #  marvel_id  :integer
 #  title      :string
 #  image_url  :string
+#  deck_id    :integer
 #  created_at :datetime
 #  updated_at :datetime
 #
