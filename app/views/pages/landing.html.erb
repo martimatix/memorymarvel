@@ -26,7 +26,9 @@
   </template>
 
   <template id="deckShowView-template">
-      <h2>You can discard a comic by clicking on it.</h2>
+    <p>You are currently viewing the deck: {{ title }}</p>
+    <p><a href="#/decks/{{ id }}/search">Add comics to this deck</a></p>
+    <h2>You can discard a comic by clicking on it.</h2>
   </template>
 
   <template id="searchView-template">

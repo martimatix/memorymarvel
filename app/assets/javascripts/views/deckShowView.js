@@ -8,8 +8,10 @@ app.DeckShowView = Backbone.View.extend({
     'click .comic-cover': 'removeComicFromDeck'
   },
   render: function () {
-    var deckShowViewHTML = $('#deckShowView-template').html();
-    this.$el.html(deckShowViewHTML);
+    var deckShowViewTemplate = $('#deckShowView-template').html();
+    var deckShowViewHTML = _.template(deckShowViewTemplate);
+
+    this.$el.html(deckShowViewHTML(this.model.toJSON()));
 
     this.comics = new app.Comics({deck_id: this.model.get('id')});
 
