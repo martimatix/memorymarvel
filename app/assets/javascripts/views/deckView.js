@@ -6,7 +6,7 @@ app.DeckView = Backbone.View.extend({
   el: '#main', // define the selector which this view is associated with
   render: function () {
 
-    var deckViewHTML = $('#deck-template').html();
+    var deckViewHTML = $('#deckView-template').html();
     this.$el.html(deckViewHTML);
   }
 });
