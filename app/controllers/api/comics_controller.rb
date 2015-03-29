@@ -2,7 +2,8 @@ class Api::ComicsController < ApplicationController
   respond_to :json
 
   def index
-    respond_with Comic.all
+    deck = Deck.find_by :id => params[:deck_id]
+    respond_with deck.comics
   end
 
   def show

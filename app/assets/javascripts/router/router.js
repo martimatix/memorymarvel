@@ -4,6 +4,7 @@ app.AppRouter = Backbone.Router.extend({
   routes: {
     '' : 'index',
     'decks' : 'listDecks',
+    'decks/:id' : 'showDeck',
     'decks/:id/search' : 'searchForComics'
   },
 
@@ -15,6 +16,12 @@ app.AppRouter = Backbone.Router.extend({
   listDecks: function () {
     var deckView = new app.DeckView({collection: app.decks});
     deckView.render();
+  },
+
+  showDeck: function (id) {
+    var deck = app.decks.get(id);
+    var deckShowView = new app.DeckShowView({model: deck});
+    deckShowView.render();
   },
 
   searchForComics: function (id) {

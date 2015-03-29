@@ -2,9 +2,9 @@ var app = app || {};
 
 app.DeckListView = Backbone.View.extend({
   tagName: 'tr', // new FlightListView will use this to create a new <tr>
-  // events: {
-  //   'click': 'showFlight'
-  // },
+  events: {
+    'click': 'showDeck'
+  },
   render: function () {
     // Fetch and compile the template.
     var deckListViewTemplate = $('#deckListView-template').html();
@@ -15,10 +15,10 @@ app.DeckListView = Backbone.View.extend({
 
     // Append this view's element to the #posts ul on the page.
     $('#decks_table_data').append(this.$el);
-  }//,
-  // showFlight: function () {
-  //   app.appRouter.navigate('flights/' + this.model.get('id'), true);
-  //   var reservationView = new app.ReservationView({model: this.model});
-  //   reservationView.render();
-  // }
+  },
+  showDeck: function () {
+    app.appRouter.navigate('decks/' + this.model.get('id'), true);
+    // var deckShowView = new app.DeckShowView({model: this.model});
+    // deckShowView.render();
+  }
 });
