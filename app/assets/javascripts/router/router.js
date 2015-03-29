@@ -1,14 +1,18 @@
 var app = app || {};
 
-// Kind of like the Rails router with embedded actions.
-// Makes the application navigatable, with meaningful URLs.
 app.AppRouter = Backbone.Router.extend({
   routes: {
     '' : 'index',
+    'decks' : 'listDecks',
     'decks/:id/search' : 'searchForComics'
   },
 
   index: function () {
+    var indexView = new app.IndexView();
+    indexView.render();
+  },
+
+  listDecks: function () {
     var deckView = new app.DeckView({collection: app.decks});
     deckView.render();
   },

@@ -1,6 +1,6 @@
 var app = app || {};
 
 app.Users = Backbone.Collection.extend({
-  url: 'api/users',
+  url: '/users',
   model: app.User
 });
