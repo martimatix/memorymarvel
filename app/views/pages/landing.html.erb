@@ -31,7 +31,8 @@
 
   <template id="searchView-template">
     <h1>Comic Search</h1>
-
+    <p>You are currently adding to the deck: {{ title }}</p>
+    <p><a href="#/decks/{{ id }}">View this deck</a></p>
     <form>
       <div>
         <label for="comic_title">Comic Title:</label><br>

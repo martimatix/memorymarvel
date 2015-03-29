@@ -10,8 +10,10 @@ app.SearchView = Backbone.View.extend({
     'click .turn-page': 'nextOrPreviousResults'
   },
   render: function (page) {
-    var searchViewHTML = $('#searchView-template').html();
-    this.$el.html(searchViewHTML);
+    var searchViewTemplate = $('#searchView-template').html();
+    var searchViewHTML = _.template(searchViewTemplate);
+
+    this.$el.html(searchViewHTML(this.model.toJSON()));
   },
 
   processSearchQuery: function (event) {
