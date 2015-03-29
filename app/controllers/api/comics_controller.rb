@@ -22,14 +22,17 @@ class Api::ComicsController < ApplicationController
       comic = Comic.create comic_params
     end
 
-    # establish associations
+    # Establish associations
     deck = Deck.find_by :id => comic_params[:deck_id]
 
     # Check to see if the deck already has this comic
     comic_in_deck = deck.comics.find_by :marvel_id => this_comic_id
 
-    if !comic_in_deck
+    # Also check that the deck has less than 12 comics
+    if !comic_in_deck && deck.comics.count < 12
       deck.comics << comic
+      deck.num_comics = deck.comics.count
+      deck.save
     end
 
     render :json => comic

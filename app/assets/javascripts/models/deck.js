@@ -3,6 +3,9 @@
 var app = app || {};
 
 app.Deck = Backbone.Model.extend({
+  urlRoot: function () {
+    return '/api/decks/';
+  },
   defaults: {
     title: 'New Deck',
     num_comics: 0,
