@@ -2,7 +2,8 @@ var app = app || {};
 
 app.SearchView = Backbone.View.extend({
   el: '#main', // define the selector which this view is associated with
-  page_number: 0, // page number for search results
+  pageNumber: 0, // page number for search results
+  resultsPerPage: 20,
   events: {
     'click #search': 'renderImages',
     'click .comic-cover': 'addComicToDeck',
@@ -21,7 +22,10 @@ app.SearchView = Backbone.View.extend({
         self.$el.append('<img src="' + image_path + '/portrait_xlarge.jpg" data-counter="' + i + '" class="comic-cover">');
       };
       self.responseJSON = result.data.results;
-      self.$el.append('<p class="turn-page" id="next">Next</p>')
+      self.$el.append('<a href class="turn-page" id="next">Next</a>');
+      if (self.pageNumber > 0) {
+        self.$el.append('<a href class="turn-page" id="previous">Previous</a>');
+      }
     });
   },
 
@@ -34,7 +38,7 @@ app.SearchView = Backbone.View.extend({
       formatType: 'comic',
       noVariants: 'true',
       titleStartsWith: $('#comic_title').val(),
-      offset: this.page_number * 20,
+      offset: this.pageNumber * this.resultsPerPage,
       apikey: 'e05840ef82f3caa5b3e1483b2a7b9d11'
     });
   },
@@ -55,10 +59,10 @@ app.SearchView = Backbone.View.extend({
     event.preventDefault();
     var nextOrPrevious = $(event.target).attr('id');
     if (nextOrPrevious === 'next') {
-      this.page_number += 1;
+      this.pageNumber += 1;
       this.renderImages();
     } else {
-      this.page_number -= 1;
+      this.pageNumber -= 1;
       this.renderImages();
     }
   }
