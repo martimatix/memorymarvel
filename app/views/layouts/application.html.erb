@@ -7,8 +7,18 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <nav>
+    <% @current_user = User.find_by :id => session[:user_id] %>
+    <% if @current_user.present? %>
+      <%= 'Logged in as ' + @current_user.name %>
+      <%= link_to('Logout', login_path, :method => :delete) %>
+    <% else %>
+      <%= link_to('Login', login_path) %>
+      <%= link_to('Sign Up', new_user_path) %>
+    <% end %>
+  </nav>
 
-<%= yield %>
+  <%= yield %>
 
 </body>
 </html>

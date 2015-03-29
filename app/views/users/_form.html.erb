@@ -1,0 +1,22 @@
+<% if @user.errors.any? %>
+  <ol>
+    <% @user.errors.full_messages.each do |msg| %>
+      <li>
+        <%= msg %>
+      </li>
+    <% end %>
+  </ol>
+<% end %>
+<%= form_for @user do |f| %>
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, :autofocus => true, :required => true, :class => 'form-control' %>
+    <%= f.label :email %>
+    <%= f.text_field :email, :class => 'form-control' %>
+    <%= f.label :password %>
+    <%= f.password_field :password, :class => 'form-control' %>
+    <%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation, :class => 'form-control' %>
+  </div>
+  <%= f.submit "Sign Up", :class => 'btn btn-success' %>
+<% end %>

@@ -13,4 +13,8 @@
 class User < ActiveRecord::Base
   has_many :decks
   has_many :favourites
+
+  has_secure_password
+     
+  validates :name, :uniqueness => true, :presence => true
 end

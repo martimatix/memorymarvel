@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
   root :to => 'pages#landing'
+  
+  resources :users
 
   namespace :api do
-    resources :users
     resources :decks do
       resources :comics
     end
