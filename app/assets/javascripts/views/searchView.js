@@ -71,6 +71,7 @@ app.SearchView = Backbone.View.extend({
     }
   },
 
+  // Todo: use Bootstrap notify
   flashMessage: function(message) {
     var $myTextMessage = $('<h1/>').css("display", "none");
     this.$el.prepend($myTextMessage);

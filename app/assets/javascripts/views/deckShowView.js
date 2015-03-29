@@ -4,17 +4,30 @@ var app = app || {};
 // Responsible for showing data on the page, but also allowing interaction.
 app.DeckShowView = Backbone.View.extend({
   el: '#main', // define the selector which this view is associated with
+  events: {
+    'click .comic-cover': 'removeComicFromDeck'
+  },
   render: function () {
     var deckShowViewHTML = $('#deckShowView-template').html();
     this.$el.html(deckShowViewHTML);
 
-    var comics = this.comics.findWhere({
-        seat_row: parseInt(row),
-    });
+    var comics = new app.Comics({deck_id: this.model.get('id')});
 
-    for (var i = 0; i < result.data.results.length; i++) {
-      var image_path = result.data.results[i].thumbnail.path;
-      $('.search-results').append('<img src="' + image_path + '/portrait_xlarge.jpg" data-counter="' + i + '" class="comic-cover">');
-    };
+    var self = this;
+
+    comics.fetch().done(function () {
+      comics.each(function(comic) {
+        var image_path = comic.get('image_url');
+        var comicID = comic.get('id');
+        var $comicCover = $('<img>').addClass('comic-cover');
+        $comicCover.attr('data-comicID', comicID);
+        $comicCover.attr('src', image_path + '/portrait_xlarge.jpg');
+        self.$el.append($comicCover);
+      });
+    });
+  },
+  removeComicFromDeck: function(event) {
+    var comicID = $(event.target).attr('comicID'); 
+    
   }
 });
