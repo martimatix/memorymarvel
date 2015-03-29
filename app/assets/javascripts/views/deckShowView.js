@@ -11,12 +11,12 @@ app.DeckShowView = Backbone.View.extend({
     var deckShowViewHTML = $('#deckShowView-template').html();
     this.$el.html(deckShowViewHTML);
 
-    var comics = new app.Comics({deck_id: this.model.get('id')});
+    this.comics = new app.Comics({deck_id: this.model.get('id')});
 
     var self = this;
 
-    comics.fetch().done(function () {
-      comics.each(function(comic) {
+    this.comics.fetch().done(function () {
+      self.comics.each(function(comic) {
         var image_path = comic.get('image_url');
         var comicID = comic.get('id');
         var $comicCover = $('<img>').addClass('comic-cover');
@@ -26,8 +26,13 @@ app.DeckShowView = Backbone.View.extend({
       });
     });
   },
+
   removeComicFromDeck: function(event) {
-    var comicID = $(event.target).attr('comicID'); 
-    
+    var comicID = $(event.target).attr('data-comicID'); 
+    var comic = this.comics.find({
+      id: parseInt(comicID)
+    });
+    // Not a true destroy - only deletes the association to the deck
+    comic.destroy({success: this.render()});
   }
 });

@@ -43,8 +43,11 @@ class Api::ComicsController < ApplicationController
     respond_with comic.update(comic_params)
   end
 
+  # Not a true destroy - only deletes association with the deck
   def destroy
-    respond_with comic.destroy
+    deck = Deck.find_by :id => params[:deck_id]
+    deck.comics.delete(comic)
+    respond_with comic
   end
 
   private
