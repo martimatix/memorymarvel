@@ -16,15 +16,16 @@ app.SearchView = Backbone.View.extend({
 
   renderImages: function () {
     self = this;
+    $('.search-results').empty();
     this.searchMarvel().then(function (result){
       for (var i = 0; i < result.data.results.length; i++) {
         var image_path = result.data.results[i].thumbnail.path;
-        self.$el.append('<img src="' + image_path + '/portrait_xlarge.jpg" data-counter="' + i + '" class="comic-cover">');
+        $('.search-results').append('<img src="' + image_path + '/portrait_xlarge.jpg" data-counter="' + i + '" class="comic-cover">');
       };
       self.responseJSON = result.data.results;
-      self.$el.append('<a href class="turn-page" id="next">Next</a>');
+      $('.search-results').append('<a href class="turn-page" id="next">Next</a>');
       if (self.pageNumber > 0) {
-        self.$el.append('<a href class="turn-page" id="previous">Previous</a>');
+        $('.search-results').append('<a href class="turn-page" id="previous">Previous</a>');
       }
     });
   },
