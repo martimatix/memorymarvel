@@ -5,7 +5,7 @@ app.SearchView = Backbone.View.extend({
   pageNumber: 0, // page number for search results
   resultsPerPage: 20,
   events: {
-    'click #search': 'renderImages',
+    'click #search': 'processSearchQuery',
     'click .comic-cover': 'addComicToDeck',
     'click .turn-page': 'nextOrPreviousResults'
   },
@@ -14,11 +14,17 @@ app.SearchView = Backbone.View.extend({
     this.$el.html(searchViewHTML);
   },
 
+  processSearchQuery: function (event) {
+    event.preventDefault();
+    this.pageNumber = 0;
+    this.renderImages();
+  },
+
   renderImages: function () {
     self = this;
     $('.search-results').empty();
 
-    this.searchMarvel().then(function (result){
+    this.searchMarvel().done(function (result){
       for (var i = 0; i < result.data.results.length; i++) {
         var image_path = result.data.results[i].thumbnail.path;
         $('.search-results').append('<img src="' + image_path + '/portrait_xlarge.jpg" data-counter="' + i + '" class="comic-cover">');
