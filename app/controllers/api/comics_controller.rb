@@ -29,8 +29,8 @@ class Api::ComicsController < ApplicationController
     # Check to see if the deck already has this comic
     comic_in_deck = deck.comics.find_by :marvel_id => this_comic_id
 
-    # Also check that the deck has less than 12 comics
-    if !comic_in_deck && deck.comics.count < 12
+    # Also check that the deck has less than 6 comics
+    if !comic_in_deck && deck.comics.count < 6
       deck.comics << comic
       deck.num_comics = deck.comics.count
       deck.save
