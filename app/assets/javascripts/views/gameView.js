@@ -62,7 +62,8 @@ app.GameView = Backbone.View.extend({
   },
   flipCard: function (event) {
     self = this;
-    if (this.numClicks === 0 && !$(event.currentTarget).hasClass('clicked')) {
+    this.numClicks++;
+    if (this.numClicks === 1 && !$(event.currentTarget).hasClass('clicked')) {
       this.numClicks = 1;
       // Store the first card element
       this.$firstCard = $(event.currentTarget);
@@ -70,9 +71,8 @@ app.GameView = Backbone.View.extend({
       TweenLite.to(this.$firstCard.find(".card"), 1, {rotationY:180, ease:Back.easeOut});
 
     // if it's the second click out of two (turning the second card)
-    } else if (this.numClicks === 1 && !$(event.currentTarget).hasClass('clicked')) {
+    } else if (this.numClicks === 2 && !$(event.currentTarget).hasClass('clicked')) {
       TweenLite.to($(event.currentTarget).find(".card"), 1, {rotationY:180, ease:Back.easeOut});
-      this.numClicks = 0;
       this.applyClickedState($(event.currentTarget));
       // Check if we have a match
       if (this.$firstCard.attr('data-comicID') === $(event.currentTarget).attr('data-comicID')) {
@@ -86,6 +86,7 @@ app.GameView = Backbone.View.extend({
           TweenLite.to($(event.currentTarget).find(".card"), 1, {rotationY:0, ease:Back.easeOut});         
           self.unapplyClickedState(self.$firstCard);
           self.unapplyClickedState($(event.currentTarget));
+          self.numClicks = 0;
        }, 1500);
       }
       // Check for game over condition
