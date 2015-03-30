@@ -3,6 +3,10 @@ var app = app || {};
 // It's better to put the game logic in another object to separate concerns.
 // However, due to time limitations, I don't have time to research this option.
 // Therefore, please excuse the poor style ^_^U
+
+// Much of the logic of the game is from:
+// https://github.com/frenski/quizy-memorygame/blob/master/js/jquery.quizymemorygame.js
+
 app.GameView = Backbone.View.extend({
   el: '#main', // define the selector which this view is associated with
   events: {
@@ -32,7 +36,10 @@ app.GameView = Backbone.View.extend({
       var image_path = comic.get('image_url');
       var comicID = comic.get('id');
       var $comicCover = $('<div/>').addClass('cardWrapper');
-      $comicCover.html(cardHTML({ 'image_url' : image_path }));
+      $comicCover.html(cardHTML({
+        'image_url' : image_path,
+        'comic_id' : comicID
+      }));
       cardElements.push($comicCover);
       cardElements.push($comicCover.clone(true));
     });
@@ -53,9 +60,9 @@ app.GameView = Backbone.View.extend({
   },
   flipCard: function (event) {
     if (this.flipped) {
-      TweenLite.to($(event.currentTarget).find(".card"), 1.2, {rotationY:0, ease:Back.easeOut}); 
+      TweenLite.to($(event.currentTarget).find(".card"), 1, {rotationY:0, ease:Back.easeOut}); 
     } else {
-      TweenLite.to($(event.currentTarget).find(".card"), 1.2, {rotationY:180, ease:Back.easeOut});
+      TweenLite.to($(event.currentTarget).find(".card"), 1, {rotationY:180, ease:Back.easeOut});
     }
     this.flipped = !this.flipped;
   }
