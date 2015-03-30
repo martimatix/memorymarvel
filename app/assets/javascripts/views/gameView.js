@@ -54,9 +54,10 @@ app.GameView = Backbone.View.extend({
   flipCard: function (event) {
     console.log('fired!');
     if (this.flipped) {
-      TweenLite.to($(this).find(".card"), 1.2, {rotationY:0, ease:Back.easeOut}); 
+      console.log(event.target)
+      TweenLite.to($(event.currentTarget).find(".card"), 1.2, {rotationY:0, ease:Back.easeOut}); 
     } else {
-      TweenLite.to($(this).find(".card"), 1.2, {rotationY:180, ease:Back.easeOut});
+      TweenLite.to($(event.currentTarget).find(".card"), 1.2, {rotationY:180, ease:Back.easeOut});
     }
     this.flipped = !this.flipped;
   }
