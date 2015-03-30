@@ -42,6 +42,7 @@ app.GameView = Backbone.View.extend({
         'image_url' : image_path,
       }));
       cardElements.push($comicCover);
+      // Clone the card element so that we have pairs of cards
       cardElements.push($comicCover.clone(true));
     });
     this.gameCards = cardElements;
@@ -73,21 +74,20 @@ app.GameView = Backbone.View.extend({
       TweenLite.to($(event.currentTarget).find(".card"), 1, {rotationY:180, ease:Back.easeOut});
       // Check if we have a match
       if (this.$firstCard.attr('data-comicID') === $(event.currentTarget).attr('data-comicID')) {
-        console.log("match!");
+        // Stuff to do if there is a match
+        this.numMatches++;
       } else {
-        console.log("no match");
+        // Stuff to do if there is no match
         setTimeout(function(){
           TweenLite.to(self.$firstCard.find(".card"), 1, {rotationY:0, ease:Back.easeOut}); 
           TweenLite.to($(event.currentTarget).find(".card"), 1, {rotationY:0, ease:Back.easeOut});         
        }, 1500);
       }
+      // Check for game over condition
+      if (this.comics.length === this.numMatches) {
+        // Do stuff when the game is over
+      }
     }
-    // if (this.flipped) {
-    //   TweenLite.to($(event.currentTarget).find(".card"), 1, {rotationY:0, ease:Back.easeOut}); 
-    // } else {
-    //   TweenLite.to($(event.currentTarget).find(".card"), 1, {rotationY:180, ease:Back.easeOut});
-    // }
-    // this.flipped = !this.flipped;
   },
   unbindClick: function (el) {
     el.unbind('click');
