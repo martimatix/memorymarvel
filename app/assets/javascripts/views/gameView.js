@@ -19,18 +19,19 @@ app.GameView = Backbone.View.extend({
     });
   },
   createCardElements: function () {
-    var comicElements = [];
+    var cardElements = [];
+    var cardTemplate = $('#card-template').html();
+    var cardHTML = _.template(cardTemplate);
+
     this.comics.each(function(comic) {
       var image_path = comic.get('image_url');
       var comicID = comic.get('id');
-      var $comicCover = $('<img>').addClass('comic-cover');
-      $comicCover.attr('src', image_path + '/portrait_xlarge.jpg');
-      comicElements.push($comicCover);
-      comicElements.push($comicCover.clone(true));
+      var $comicCover = $('<div/>').addClass('cardWrapper');
+      $comicCover.html(cardHTML({ 'image_url' : image_path }));
+      cardElements.push($comicCover);
+      cardElements.push($comicCover.clone(true));
     });
-    // We need to duplicate the list since each card needs a match
-    // this.gameCards = comicElements.concat(comicElements);
-    this.gameCards = comicElements;
+    this.gameCards = cardElements;
   },
   shuffleAndLayCards: function () {
     var self = this;
