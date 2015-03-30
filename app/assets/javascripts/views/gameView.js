@@ -35,10 +35,10 @@ app.GameView = Backbone.View.extend({
   },
   shuffleAndLayCards: function () {
     var self = this;
-      console.log(this.gameCards.length);
+    console.log(this.gameCards);
     this.gameCards = _.shuffle(this.gameCards);
     _.each(this.gameCards, function ($card) {
-      self.$el.append($card);
+      $card.appendTo(self.$el);
     });
   }
 });
