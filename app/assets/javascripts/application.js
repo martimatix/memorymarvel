@@ -19,4 +19,5 @@
 //= require_tree ./collections
 //= require_tree ./views
 //= require_tree ./router
+//= require_tree ./helpers
 //= require_tree .
