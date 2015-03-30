@@ -5,6 +5,10 @@ var app = app || {};
 // Therefore, please excuse the poor style ^_^U
 app.GameView = Backbone.View.extend({
   el: '#main', // define the selector which this view is associated with
+  events: {
+    'click .cardWrapper': 'flipCard'
+  },
+  flipped: false,
   render: function () {
     var gameViewHTML = $('#gameView-template').html();
     this.$el.html(gameViewHTML);
@@ -16,6 +20,7 @@ app.GameView = Backbone.View.extend({
     this.comics.fetch().done( function () {
       self.createCardElements();
       self.shuffleAndLayCards();
+      self.initializeGreenSock();
     });
   },
   createCardElements: function () {
@@ -35,10 +40,26 @@ app.GameView = Backbone.View.extend({
   },
   shuffleAndLayCards: function () {
     var self = this;
-    console.log(this.gameCards);
     this.gameCards = _.shuffle(this.gameCards);
     _.each(this.gameCards, function ($card) {
       $card.appendTo(self.$el);
     });
+  },
+  initializeGreenSock: function () {
+    TweenLite.set(".cardWrapper", {perspective:800});
+    TweenLite.set(".card", {transformStyle:"preserve-3d"});
+    TweenLite.set(".back", {rotationY:-180});
+    TweenLite.set([".back", ".front"], {backfaceVisibility:"hidden"});
+  },
+  flipCard: function (event) {
+    console.log('fired!');
+    if (this.flipped) {
+      TweenLite.to($(this).find(".card"), 1.2, {rotationY:0, ease:Back.easeOut}); 
+    } else {
+      TweenLite.to($(this).find(".card"), 1.2, {rotationY:180, ease:Back.easeOut});
+    }
+    this.flipped = !this.flipped;
   }
 });
+
+// this.$('.card')
