@@ -37,10 +37,9 @@ app.GameView = Backbone.View.extend({
     this.comics.each(function(comic) {
       var image_path = comic.get('image_url');
       var comicID = comic.get('id');
-      var $comicCover = $('<div/>').addClass('cardWrapper');
+      var $comicCover = $('<div/>').addClass('cardWrapper').attr('data-comicID', comicID);;
       $comicCover.html(cardHTML({
         'image_url' : image_path,
-        'comic_id' : comicID
       }));
       cardElements.push($comicCover);
       cardElements.push($comicCover.clone(true));
@@ -62,12 +61,21 @@ app.GameView = Backbone.View.extend({
   },
   flipCard: function (event) {
     if (this.numClicks === 0) {
-      this.numClicks += 1;
-      // selItemClass = tClass;
-      // selItemId = tId;
+      this.numClicks = 1;
+      // Store the ID of the first comic
+      this.firstComicID = $(event.currentTarget).attr('data-comicID');
       TweenLite.to($(event.currentTarget).find(".card"), 1, {rotationY:180, ease:Back.easeOut});
 
     // if it's the second click out of two (turning the second card)
+    } else if (this.numClicks === 1) {
+      this.numClicks = 0;
+      TweenLite.to($(event.currentTarget).find(".card"), 1, {rotationY:180, ease:Back.easeOut});
+      // Check if we have a match
+      if (this.firstComicID === $(event.currentTarget).attr('data-comicID')) {
+        console.log("match!");
+      } else {
+        console.log("no match");
+      }
     }
     // if (this.flipped) {
     //   TweenLite.to($(event.currentTarget).find(".card"), 1, {rotationY:0, ease:Back.easeOut}); 
