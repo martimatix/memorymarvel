@@ -60,21 +60,26 @@ app.GameView = Backbone.View.extend({
     TweenLite.set([".back", ".front"], {backfaceVisibility:"hidden"});
   },
   flipCard: function (event) {
+    self = this;
     if (this.numClicks === 0) {
       this.numClicks = 1;
-      // Store the ID of the first comic
-      this.firstComicID = $(event.currentTarget).attr('data-comicID');
-      TweenLite.to($(event.currentTarget).find(".card"), 1, {rotationY:180, ease:Back.easeOut});
+      // Store the first card element
+      this.$firstCard = $(event.currentTarget);
+      TweenLite.to(this.$firstCard.find(".card"), 1, {rotationY:180, ease:Back.easeOut});
 
     // if it's the second click out of two (turning the second card)
     } else if (this.numClicks === 1) {
       this.numClicks = 0;
       TweenLite.to($(event.currentTarget).find(".card"), 1, {rotationY:180, ease:Back.easeOut});
       // Check if we have a match
-      if (this.firstComicID === $(event.currentTarget).attr('data-comicID')) {
+      if (this.$firstCard.attr('data-comicID') === $(event.currentTarget).attr('data-comicID')) {
         console.log("match!");
       } else {
         console.log("no match");
+        setTimeout(function(){
+          TweenLite.to(self.$firstCard.find(".card"), 1, {rotationY:0, ease:Back.easeOut}); 
+          TweenLite.to($(event.currentTarget).find(".card"), 1, {rotationY:0, ease:Back.easeOut});         
+       }, 1500);
       }
     }
     // if (this.flipped) {
