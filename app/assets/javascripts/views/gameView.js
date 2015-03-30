@@ -26,12 +26,15 @@ app.GameView = Backbone.View.extend({
       var $comicCover = $('<img>').addClass('comic-cover');
       $comicCover.attr('src', image_path + '/portrait_xlarge.jpg');
       comicElements.push($comicCover);
+      comicElements.push($comicCover.clone(true));
     });
     // We need to duplicate the list since each card needs a match
-    this.gameCards = comicElements.concat(comicElements);
+    // this.gameCards = comicElements.concat(comicElements);
+    this.gameCards = comicElements;
   },
   shuffleAndLayCards: function () {
-    self = this;
+    var self = this;
+      console.log(this.gameCards.length);
     this.gameCards = _.shuffle(this.gameCards);
     _.each(this.gameCards, function ($card) {
       self.$el.append($card);
