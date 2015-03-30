@@ -62,25 +62,30 @@ app.GameView = Backbone.View.extend({
   },
   flipCard: function (event) {
     self = this;
-    if (this.numClicks === 0) {
+    if (this.numClicks === 0 && !$(event.currentTarget).hasClass('clicked')) {
       this.numClicks = 1;
       // Store the first card element
       this.$firstCard = $(event.currentTarget);
+      this.applyClickedState(this.$firstCard);
       TweenLite.to(this.$firstCard.find(".card"), 1, {rotationY:180, ease:Back.easeOut});
 
     // if it's the second click out of two (turning the second card)
-    } else if (this.numClicks === 1) {
-      this.numClicks = 0;
+    } else if (this.numClicks === 1 && !$(event.currentTarget).hasClass('clicked')) {
       TweenLite.to($(event.currentTarget).find(".card"), 1, {rotationY:180, ease:Back.easeOut});
+      this.numClicks = 0;
+      this.applyClickedState($(event.currentTarget));
       // Check if we have a match
       if (this.$firstCard.attr('data-comicID') === $(event.currentTarget).attr('data-comicID')) {
         // Stuff to do if there is a match
         this.numMatches++;
+        // this.unbindClick(this.$firstCard);
       } else {
         // Stuff to do if there is no match
         setTimeout(function(){
           TweenLite.to(self.$firstCard.find(".card"), 1, {rotationY:0, ease:Back.easeOut}); 
           TweenLite.to($(event.currentTarget).find(".card"), 1, {rotationY:0, ease:Back.easeOut});         
+          self.unapplyClickedState(self.$firstCard);
+          self.unapplyClickedState($(event.currentTarget));
        }, 1500);
       }
       // Check for game over condition
@@ -89,14 +94,14 @@ app.GameView = Backbone.View.extend({
       }
     }
   },
-  unbindClick: function (el) {
-    el.unbind('click');
+  applyClickedState: function (el) {
+    el.addClass('clicked');
     el.css('cursor','default');
   },
 
   // adds a click to an element
-  bindClick: function (el) {
-    el.bind('click',handleClick);
+  unapplyClickedState: function (el) {
+    el.removeClass('clicked');
     el.css('cursor','pointer');
   }
 });
