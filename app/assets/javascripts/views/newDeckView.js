@@ -13,10 +13,7 @@ app.NewDeckView = Backbone.View.extend({
   },
   createDeck: function (event) {
     event.preventDefault();
-    // var newDeck = new app.Deck({
-    //   title: $('#deck-title').val(),
-    //   user_id: 1
-    // });
+
     var newDeck = app.decks.create({ 
       title: $('#deck-title').val(), 
       user_id: 1 
@@ -26,10 +23,5 @@ app.NewDeckView = Backbone.View.extend({
       }
     });
 
-    // .done(function () {
-      // app.decks.fetch().done( function () {
-      //   app.appRouter.navigate('decks/' + app.decks.get('id') + '/search', true);
-      // });
-    // });
   }
 });
