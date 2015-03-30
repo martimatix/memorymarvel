@@ -13,6 +13,8 @@ app.GameView = Backbone.View.extend({
     'click .cardWrapper': 'flipCard'
   },
   flipped: false,
+  numClicks: 0,
+  numMatches: 0,
   render: function () {
     var gameViewHTML = $('#gameView-template').html();
     this.$el.html(gameViewHTML);
@@ -59,13 +61,31 @@ app.GameView = Backbone.View.extend({
     TweenLite.set([".back", ".front"], {backfaceVisibility:"hidden"});
   },
   flipCard: function (event) {
-    if (this.flipped) {
-      TweenLite.to($(event.currentTarget).find(".card"), 1, {rotationY:0, ease:Back.easeOut}); 
-    } else {
+    if (this.numClicks === 0) {
+      this.numClicks += 1;
+      // selItemClass = tClass;
+      // selItemId = tId;
       TweenLite.to($(event.currentTarget).find(".card"), 1, {rotationY:180, ease:Back.easeOut});
+
+    // if it's the second click out of two (turning the second card)
     }
-    this.flipped = !this.flipped;
+    // if (this.flipped) {
+    //   TweenLite.to($(event.currentTarget).find(".card"), 1, {rotationY:0, ease:Back.easeOut}); 
+    // } else {
+    //   TweenLite.to($(event.currentTarget).find(".card"), 1, {rotationY:180, ease:Back.easeOut});
+    // }
+    // this.flipped = !this.flipped;
+  },
+  unbindClick: function (el) {
+    el.unbind('click');
+    el.css('cursor','default');
+  },
+
+  // adds a click to an element
+  bindClick: function (el) {
+    el.bind('click',handleClick);
+    el.css('cursor','pointer');
   }
 });
 
-// this.$('.card')
+
