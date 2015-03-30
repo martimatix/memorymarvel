@@ -52,9 +52,7 @@ app.GameView = Backbone.View.extend({
     TweenLite.set([".back", ".front"], {backfaceVisibility:"hidden"});
   },
   flipCard: function (event) {
-    console.log('fired!');
     if (this.flipped) {
-      console.log(event.target)
       TweenLite.to($(event.currentTarget).find(".card"), 1.2, {rotationY:0, ease:Back.easeOut}); 
     } else {
       TweenLite.to($(event.currentTarget).find(".card"), 1.2, {rotationY:180, ease:Back.easeOut});
