@@ -18,7 +18,5 @@ app.DeckListView = Backbone.View.extend({
   },
   showDeck: function () {
     app.appRouter.navigate('decks/' + this.model.get('id'), true);
-    // var deckShowView = new app.DeckShowView({model: this.model});
-    // deckShowView.render();
   }
 });

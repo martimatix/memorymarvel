@@ -25,6 +25,17 @@
       <td>{{ num_comics }}</td>
   </template>
 
+  <template id="newDeckView-template">
+    <h1>New Deck</h1>
+    <form>
+      <div>
+        <label for="deck-title">Give a name for your new deck:</label><br>
+        <input id="deck-title">
+      </div>
+      <button id="create-deck">Create Deck</button>
+    </form>
+  </template>
+
   <template id="deckShowView-template">
     <p>You are currently viewing the deck: {{ title }}</p>
     <p><a href="#/decks/{{ id }}/search">Add comics to this deck</a></p>

@@ -9,10 +9,10 @@ app.SearchView = Backbone.View.extend({
     'click .comic-cover': 'addComicToDeck',
     'click .turn-page': 'nextOrPreviousResults'
   },
-  render: function (page) {
+  render: function () {
     var searchViewTemplate = $('#searchView-template').html();
     var searchViewHTML = _.template(searchViewTemplate);
-
+    // debugger
     this.$el.html(searchViewHTML(this.model.toJSON()));
   },
 
