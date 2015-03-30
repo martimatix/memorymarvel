@@ -38,8 +38,6 @@ gem 'puma'
 # Required for json serialization
 gem 'responders', '~> 2.0'
 
-gem 'greensock-rails'
-
 gem 'rails_12factor', group: :production
 
 group :development do
