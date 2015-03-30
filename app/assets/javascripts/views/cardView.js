@@ -12,10 +12,19 @@ app.CardListView = Backbone.View.extend({
     var cardHTML = _.template(cardTemplate);
 
     // Set the content of this view's element to be the template for this model.
-    this.$el.html(cardHTML(this.model.toJSON()));
+    var image_path = this.model.get('image_url');
+    this.$el.html(cardHTML({ 'image_url' : image_path }));
 
     // Append this view's element to the #posts ul on the page.
+    (this.$el).addClass('cardWrapper');
     $('#game').append(this.$el);
+    initializeGreenSock();
+  },
+  initializeGreenSock: function () {
+    TweenLite.set(".cardWrapper", {perspective:800});
+    TweenLite.set(".card", {transformStyle:"preserve-3d"});
+    TweenLite.set(".back", {rotationY:-180});
+    TweenLite.set([".back", ".front"], {backfaceVisibility:"hidden"});
   },
   flipCard: function (event) {
     console.log('fired!');
