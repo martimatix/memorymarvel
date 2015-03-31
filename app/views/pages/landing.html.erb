@@ -11,11 +11,11 @@
 
   <template id="deckView-template">
     <h2>Available Decks</h2>
-    <a href="#decks/new">New Deck</a>
-    <table>
+    <table class="table-light">
       <tr>
         <th>Title</th>
         <th>Number of comics</th>
+        <th>Thumbnails</th>
       </tr>
       <tbody id="decks_table_data"></tbody>
     </table>
@@ -24,6 +24,7 @@
   <template id="deckListView-template">
       <td>{{ title }}</td>
       <td>{{ num_comics }}</td>
+      <td></td>
   </template>
 
   <template id="newDeckView-template">
