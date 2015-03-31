@@ -27,21 +27,30 @@ app.SearchView = Backbone.View.extend({
 
     this.searchMarvel().done(function (result){
       $('.search-results').empty();
-      for (var i = 0; i < result.data.results.length; i++) {
-        var image_path = result.data.results[i].thumbnail.path;
-        $('.search-results').append('<img src="' + image_path + '/portrait_xlarge.jpg" data-counter="' + i + '" class="comic-cover">');
-      };
-      self.responseJSON = result.data.results;
-      $('.next').html('<a href class="turn-page" id="next">Next</a>');
-      $('.instructions').html('<p>Click on a comic to add it to your deck.</p>');
-      if (self.pageNumber > 0) {
-        $('.previous').html('<a href class="turn-page" id="previous">Previous</a>');
+      if (result.data.total === 0) {
+        $noResults = $('<h1/>').text('No results were found');
+        $('.search-results').append($noResults);
+      } else {
+        for (var i = 0; i < result.data.results.length; i++) {
+          var image_path = result.data.results[i].thumbnail.path;
+          $('.search-results').append('<img src="' + image_path + '/portrait_xlarge.jpg" data-counter="' + i + '" class="comic-cover">');
+        };
+        self.responseJSON = result.data.results;
+        $('.next').html('<a href class="turn-page" id="next">Next</a>');
+        $('.instructions').html('<p>Click on a comic to add it to your deck.</p>');
+        if (self.pageNumber > 0) {
+          $('.previous').html('<a href class="turn-page" id="previous">Previous</a>');
+        } 
       }
     });
   },
 
   searchMarvel: function () {
     $('.search-results').empty();
+    var searchQuery = $('#comic_title').val()
+    if (searchQuery === '') {
+      return
+    }
     $loadingMessage = $('<h1/>').text('Searching Marvel Database');
     $loadingImage = $('<img>').attr('src', 'assets/loading_image.gif')
     $('.search-results').append($loadingMessage).append($loadingImage);
@@ -52,7 +61,7 @@ app.SearchView = Backbone.View.extend({
       format: 'comic',
       formatType: 'comic',
       noVariants: 'true',
-      titleStartsWith: $('#comic_title').val(),
+      titleStartsWith: searchQuery,
       limit: this.resultsPerPage,
       offset: this.pageNumber * this.resultsPerPage,
       apikey: 'e05840ef82f3caa5b3e1483b2a7b9d11'
