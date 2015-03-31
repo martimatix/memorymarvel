@@ -43,17 +43,36 @@
   </template>
 
   <template id="searchView-template">
-    <h1>Comic Search</h1>
-    <p>You are currently adding to the deck: {{ title }}</p>
-    <p><a href="#/decks/{{ id }}">View this deck</a></p>
-    <form>
-      <label for="comic_title">Name of the comic you want to add:</label>
-      <br>
-      <input type="search" id="comic_title" class="mb0 field-light">
-      <button id="search" class="button">Search</button>
-    </form>
+    <div class="col col-4">
+      <h1>Comic Search</h1>
+      <p>You are currently adding to the deck: {{ title }}</p>
+      <p><a href="#/decks/{{ id }}">View this deck</a></p>
+      <form>
+        <label for="comic_title">Name of the comic you want to add:</label>
+        <br>
+        <input type="search" id="comic_title" class="mb0 field-light">
+        <button id="search" class="button">Search</button>
+      </form>
+      <div class="suggestions bg-silver">
+        <h3>Suggestions</h3>
+        <ul>
+          <li>Spider-man</li>
+          <li>X-men</li>
+          <li>Deadpool</li>
+          <li>Guardians of the Galaxy</li>
+          <li>Ms. Marvel</li>
+          <li>Avengers</li>
+          <li>Fantastic Four</li>
+        </ul>
+      </div>
+    </div>
 
-    <div class="search-results"></div>
+    <div class="col col-8 px2">
+      <div class="search-results center"></div>
+      <div class="previous col col-3">&nbsp</div>
+      <div class="instructions col col-6 center">&nbsp</div>
+      <div class="next col col-3 right-align"></div>
+    </div>
   </template>
 
   <template id="gameView-template">

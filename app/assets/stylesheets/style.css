@@ -1,3 +1,23 @@
+.suggestions {
+  padding: 5px;
+  padding-left: 20px;
+  border-radius: 10px;
+  margin-top: 1em;
+  width: 70%;
+}
+
+.search-results {
+  margin-top: 2em;
+}
+
+.comic-cover {
+  margin-top: 3px;
+  margin-bottom: 0px;
+  padding: 0px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
 .cardWrapper{
   width:133px;
   height:200px;

@@ -3,7 +3,7 @@ var app = app || {};
 app.SearchView = Backbone.View.extend({
   el: '#main', // define the selector which this view is associated with
   pageNumber: 0, // page number for search results
-  resultsPerPage: 20,
+  resultsPerPage: 8,
   events: {
     'click #search': 'processSearchQuery',
     'click .comic-cover': 'addComicToDeck',
@@ -32,9 +32,10 @@ app.SearchView = Backbone.View.extend({
         $('.search-results').append('<img src="' + image_path + '/portrait_xlarge.jpg" data-counter="' + i + '" class="comic-cover">');
       };
       self.responseJSON = result.data.results;
-      $('.search-results').append('<a href class="turn-page" id="next">Next</a>');
+      $('.next').html('<a href class="turn-page" id="next">Next</a>');
+      $('.instructions').html('<p>Click on a comic to add it to your deck.</p>');
       if (self.pageNumber > 0) {
-        $('.search-results').append('<a href class="turn-page" id="previous">Previous</a>');
+        $('.previous').html('<a href class="turn-page" id="previous">Previous</a>');
       }
     });
   },
@@ -48,6 +49,7 @@ app.SearchView = Backbone.View.extend({
       formatType: 'comic',
       noVariants: 'true',
       titleStartsWith: $('#comic_title').val(),
+      limit: this.resultsPerPage,
       offset: this.pageNumber * this.resultsPerPage,
       apikey: 'e05840ef82f3caa5b3e1483b2a7b9d11'
     });
