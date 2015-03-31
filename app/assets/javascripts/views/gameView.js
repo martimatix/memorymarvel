@@ -73,10 +73,11 @@ app.GameView = Backbone.View.extend({
       TweenLite.to(this.$firstCard.find(".card"), 1, {rotationY:180, ease:Back.easeOut});
     // if it's the second click out of two (turning the second card)
     } else if ($('.clicked').length < (self.numMatchedCards + 2)) {
+      this.$secondCard = $(event.currentTarget);
       TweenLite.to($(event.currentTarget).find(".card"), 1, {rotationY:180, ease:Back.easeOut});
-      this.applyClickedState($(event.currentTarget));
+      this.applyClickedState(this.$secondCard);
       // Check if we have a match
-      if (this.$firstCard.attr('data-comicID') === $(event.currentTarget).attr('data-comicID')) {
+      if (this.$firstCard.attr('data-comicID') === this.$secondCard.attr('data-comicID')) {
         // Stuff to do if there is a match
         self.numMatchedCards += 2;
         self.numClicks = 0;
@@ -85,9 +86,9 @@ app.GameView = Backbone.View.extend({
         // Stuff to do if there is no match
         setTimeout(function(){
           TweenLite.to(self.$firstCard.find(".card"), 1, {rotationY:0, ease:Back.easeOut}); 
-          TweenLite.to($(event.currentTarget).find(".card"), 1, {rotationY:0, ease:Back.easeOut});         
+          TweenLite.to(self.$secondCard.find(".card"), 1, {rotationY:0, ease:Back.easeOut});         
           self.unapplyClickedState(self.$firstCard);
-          self.unapplyClickedState($(event.currentTarget));
+          self.unapplyClickedState(self.$secondCard);
           self.numClicks = 0;
        }, 1500);
       }
@@ -140,12 +141,13 @@ app.GameView = Backbone.View.extend({
     TweenLite.to($image, 0.5, {left: (window.innerWidth - $image.width())/2,
                                top: (window.innerHeight - $image.height())/2,
                                delay: 0.5
-                              });
+    });
 
     // Enlarge image
     TweenLite.to($image, 0.25, {scale: 0.95 * window.innerHeight/$image.height(),
                                         ease:Sine.easeIn,
-                                        delay: 1});
+                                        delay: 1
+    });
 
   } 
 });
