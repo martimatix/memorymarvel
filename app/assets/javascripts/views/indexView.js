@@ -7,5 +7,15 @@ app.IndexView = Backbone.View.extend({
   render: function () {
     var indexViewHTML = $('#indexView-template').html();
     this.$el.html(indexViewHTML);
+
+    var self = this;
+
+    $.get( "/front_page_images.json", function( data ) {
+      _.each(data, function(image_url) {
+        $('.background').append($('<img>').attr('src', image_url))
+      });
+    });
+
+
   }
 });

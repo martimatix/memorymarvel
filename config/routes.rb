@@ -12,6 +12,8 @@ Rails.application.routes.draw do
 
   get '/current_user' => 'session#current_user'
 
+  get '/front_page_images' =>'pages#front_page_images'
+
   get '/login' => 'session#new'
   post '/login' => 'session#create'
   delete '/login' => 'session#destroy'
