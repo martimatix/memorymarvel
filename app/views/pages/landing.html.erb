@@ -30,14 +30,14 @@
     <form>
       <div>
         <label for="deck-title">Give a name for your new deck:</label><br>
-        <input id="deck-title">
+        <input id="deck-title" type="text" class="mb0 field-light">
+        <button id="create-deck" class="button">Create Deck</button>
       </div>
-      <button id="create-deck">Create Deck</button>
     </form>
   </template>
 
   <template id="deckShowView-template">
-    <p>You are currently viewing the deck: {{ title }}</p>
+    <h1>Viewing the deck: {{ title }}</h1>
     <p><a href="#/decks/{{ id }}/search">Add comics to this deck</a></p>
     <h2>You can discard a comic by clicking on it.</h2>
   </template>
