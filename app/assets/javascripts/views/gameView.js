@@ -133,9 +133,12 @@ app.GameView = Backbone.View.extend({
     this.$el.append($image);
     this.$el.append($dimmingElement);
 
-    // Dim screen
+    // Dim screen and cards
     TweenMax.set($dimmingElement,{opacity:0});
-    TweenMax.to($dimmingElement,2, {opacity:0.7});
+    TweenMax.to($dimmingElement, 2, {opacity:0.7});
+    TweenMax.to([this.$firstCard, this.$secondCard], 2, {opacity:0});
+
+    this.$secondCard
 
     // Translate image to centre of screen
     TweenLite.to($image, 0.5, {left: (window.innerWidth - $image.width())/2,
