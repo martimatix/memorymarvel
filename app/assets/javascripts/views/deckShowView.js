@@ -5,7 +5,7 @@ var app = app || {};
 app.DeckShowView = Backbone.View.extend({
   el: '#main', // define the selector which this view is associated with
   events: {
-    'click .comic-cover': 'removeComicFromDeck'
+    'click .comic-cover2': 'removeComicFromDeck'
   },
   render: function () {
     var deckShowViewTemplate = $('#deckShowView-template').html();
@@ -21,7 +21,7 @@ app.DeckShowView = Backbone.View.extend({
       self.comics.each(function(comic) {
         var image_path = comic.get('image_url');
         var comicID = comic.get('id');
-        var $comicCover = $('<img>').addClass('comic-cover');
+        var $comicCover = $('<img>').addClass('comic-cover2');
         $comicCover.attr('data-comicID', comicID);
         $comicCover.attr('src', image_path + '/portrait_xlarge.jpg');
         self.$el.append($comicCover);
