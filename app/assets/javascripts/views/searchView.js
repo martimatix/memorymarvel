@@ -24,9 +24,9 @@ app.SearchView = Backbone.View.extend({
 
   renderImages: function () {
     self = this;
-    $('.search-results').empty();
 
     this.searchMarvel().done(function (result){
+      $('.search-results').empty();
       for (var i = 0; i < result.data.results.length; i++) {
         var image_path = result.data.results[i].thumbnail.path;
         $('.search-results').append('<img src="' + image_path + '/portrait_xlarge.jpg" data-counter="' + i + '" class="comic-cover">');
@@ -41,7 +41,11 @@ app.SearchView = Backbone.View.extend({
   },
 
   searchMarvel: function () {
-    console.log('searching marvel');
+    $('.search-results').empty();
+    $loadingMessage = $('<h1/>').text('Searching Marvel Database');
+    $loadingImage = $('<img>').attr('src', 'assets/loading_image.gif')
+    $('.search-results').append($loadingMessage).append($loadingImage);
+
     var marvelUrl = 'http://gateway.marvel.com:80/v1/public/comics?';
 
     return $.getJSON(marvelUrl, {
@@ -53,6 +57,7 @@ app.SearchView = Backbone.View.extend({
       offset: this.pageNumber * this.resultsPerPage,
       apikey: 'e05840ef82f3caa5b3e1483b2a7b9d11'
     });
+
   },
 
   addComicToDeck: function(event) {
