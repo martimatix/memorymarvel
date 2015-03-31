@@ -41,13 +41,12 @@ app.DeckShowView = Backbone.View.extend({
       var comic = this.comics.find({
         id: parseInt(comicID)
       });
+      comic.attributes.deck_id = this.model.get('id')
       // Not a true destroy - only deletes the association to the deck
       comic.destroy({success: function () {
-        self.comics.fetch().done( function () {
-          $(event.target).remove();
-          self.okToDelete = true;
-          self.updateInfoMessage();   
-        });
+        $(event.target).remove();
+        self.okToDelete = true;
+        self.updateInfoMessage();   
       }}); 
     }
   },
