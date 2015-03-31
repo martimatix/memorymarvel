@@ -11,36 +11,43 @@ app.AppRouter = Backbone.Router.extend({
   },
 
   index: function () {
-    var indexView = new app.IndexView();
-    indexView.render();
+    app.currentView && app.currentView.unbind();
+    app.currentView = new app.IndexView();
+    app.currentView.render();
   },
 
   listDecks: function () {
-    var deckView = new app.DeckView({collection: app.decks});
-    deckView.render();
+    app.currentView && app.currentView.unbind();
+    debugger;
+    app.currentView = new app.DeckView({collection: app.decks});
+    app.currentView.render();
   },
 
   newDeck: function () {
-    var newDeckView = new app.NewDeckView({collection: app.decks});
-    newDeckView.render();
+    app.currentView && app.currentView.unbind();
+    app.currentView = new app.NewDeckView({collection: app.decks});
+    app.currentView.render(); 
   },
 
   showDeck: function (id) {
+    app.currentView && app.currentView.unbind();
     var deck = app.decks.get(id);
-    var deckShowView = new app.DeckShowView({model: deck});
-    deckShowView.render();
+    app.currentView = new app.DeckShowView({model: deck});
+    app.currentView.render();
   },
 
   searchForComics: function (id) {
+    app.currentView && app.currentView.unbind();
     var deck = app.decks.get(id);
-    var searchView = new app.SearchView({model: deck});
-    searchView.render();
+    app.currentView = new app.SearchView({model: deck});
+    app.currentView.render(); 
   },
 
   game: function (id) {
+    app.currentView && app.currentView.unbind();
     var deck = app.decks.get(id);
-    var gameView = new app.GameView({model: deck});
-    gameView.render();
+    app.currentView = new app.GameView({model: deck});
+    app.currentView.render();
   }
 
 });
