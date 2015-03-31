@@ -47,11 +47,10 @@
     <p>You are currently adding to the deck: {{ title }}</p>
     <p><a href="#/decks/{{ id }}">View this deck</a></p>
     <form>
-      <div>
-        <label for="comic_title">Comic Title:</label><br>
-        <input type="search" id="comic_title">
-      </div>
-      <button id="search">Search</button>
+      <label for="comic_title">Name of the comic you want to add:</label>
+      <br>
+      <input type="search" id="comic_title" class="mb0 field-light">
+      <button id="search" class="button">Search</button>
     </form>
 
     <div class="search-results"></div>
