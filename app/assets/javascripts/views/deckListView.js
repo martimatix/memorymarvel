@@ -15,11 +15,11 @@ app.DeckListView = Backbone.View.extend({
     // Set the content of this view's element to be the template for this model.
     this.$el.html(deckListViewHTML(this.model.toJSON()));
 
-    $thumbnails = this.$el.find('#thumbnails')
     var comics = new app.Comics({deck_id: this.model.get('id')});
 
     comics.fetch().done(function () {
       comics.each(function(comic) {
+        $thumbnails = self.$el.find('#thumbnails')
         var image_path = comic.get('image_url');
         var $thumbnail = $('<img>').attr('src', image_path + '/portrait_small.jpg');
         $thumbnails.append($thumbnail);
