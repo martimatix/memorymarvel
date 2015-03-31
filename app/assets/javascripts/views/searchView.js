@@ -87,7 +87,7 @@ app.SearchView = Backbone.View.extend({
 
   nextOrPreviousResults: function(event) {
     event.preventDefault();
-    var nextOrPrevious = $(event.target).attr('id');
+    var nextOrPrevious = $(event.target).attr('id');r
     if (nextOrPrevious === 'next') {
       this.pageNumber += 1;
       this.renderImages();
@@ -99,13 +99,14 @@ app.SearchView = Backbone.View.extend({
 
   // Todo: use Bootstrap notify
   flashMessage: function(message) {
-    var $myTextMessage = $('<h1/>').css("display", "none");
-    this.$el.prepend($myTextMessage);
-    $myTextMessage.text(message);
-    $myTextMessage.slideDown(function() {
-      setTimeout(function() {
-          $myTextMessage.slideUp();
-      }, 2000);
-    });
+    $.growl.notice({ message: "The kitten is cute!", location: "br" });
+    // var $myTextMessage = $('<h1/>').css("display", "none");
+    // this.$el.prepend($myTextMessage);
+    // $myTextMessage.text(message);
+    // $myTextMessage.slideDown(function() {
+    //   setTimeout(function() {
+    //       $myTextMessage.slideUp();
+    //   }, 2000);
+    // });
   }
 });
