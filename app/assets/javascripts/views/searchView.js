@@ -46,7 +46,9 @@ app.SearchView = Backbone.View.extend({
   },
 
   searchMarvel: function () {
-    $('.search-results').empty();
+    $('.search-results, .previous, .instructions, .next').empty();
+    $('.previous').html('&nbsp');
+    // Handle empty search field - albeit not gracefully
     var searchQuery = $('#comic_title').val()
     if (searchQuery === '') {
       return
