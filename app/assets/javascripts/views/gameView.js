@@ -14,10 +14,11 @@ app.GameView = Backbone.View.extend({
   },
   flipped: false,
   numClicks: 0,
-  numMatches: 0,
+  numMatchedCards: 0,
   render: function () {
     var gameViewHTML = $('#gameView-template').html();
     this.$el.html(gameViewHTML);
+    this.$el.append($('<div/>').addClass('background'));
     this.startGame();
   },
   startGame: function () {
@@ -62,21 +63,22 @@ app.GameView = Backbone.View.extend({
   },
   flipCard: function (event) {
     self = this;
-    this.numClicks++;
-    if (this.numClicks === 1 && !$(event.currentTarget).hasClass('clicked')) {
+    if ($(event.currentTarget).hasClass('clicked')) {
+      return
+    } else if (this.numClicks === 0) {
       this.numClicks = 1;
       // Store the first card element
       this.$firstCard = $(event.currentTarget);
       this.applyClickedState(this.$firstCard);
       TweenLite.to(this.$firstCard.find(".card"), 1, {rotationY:180, ease:Back.easeOut});
     // if it's the second click out of two (turning the second card)
-    } else if (this.numClicks > 1 && !$(event.currentTarget).hasClass('clicked')) {
+    } else if ($('.clicked').length < (self.numMatchedCards + 2)) {
       TweenLite.to($(event.currentTarget).find(".card"), 1, {rotationY:180, ease:Back.easeOut});
       this.applyClickedState($(event.currentTarget));
       // Check if we have a match
       if (this.$firstCard.attr('data-comicID') === $(event.currentTarget).attr('data-comicID')) {
         // Stuff to do if there is a match
-        this.numMatches++;
+        self.numMatchedCards += 2;
         self.numClicks = 0;
       } else {
         // Stuff to do if there is no match

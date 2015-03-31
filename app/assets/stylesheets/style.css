@@ -6,7 +6,7 @@
   height: 110%;
   z-index: -1;
   font-size: 0;
-  background-color: black;
+  background-color: #444444;;
 }
 
 .suggestions {
@@ -50,7 +50,9 @@
 }
 
 .front{
-  background-color:red; 
+  background-color:red;
+  border-radius: 10px;
+  border: 2px solid white;
 }
 
 .back{
