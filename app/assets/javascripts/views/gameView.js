@@ -118,12 +118,15 @@ app.GameView = Backbone.View.extend({
     $image.css({
         position: 'absolute',
         top:      posY,
-        left:     posX - 5
+        left:     posX,
+        width:   '133px'
       }
     );
 
     this.$el.append($image);
-
+    TweenLite.to($image, 0.5, {left: (window.innerWidth - $image.width())/2, top: (window.innerHeight - $image.height())/2});
+    // TweenMax.set($image, {transformOrigin:'0 0'});
+    tween = TweenLite.to($image, 0.25, {scale: 0.95 * window.innerHeight/$image.height(), ease:Sine.easeIn, delay: 0.5});
 
   }
 });
