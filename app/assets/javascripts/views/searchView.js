@@ -82,7 +82,7 @@ app.SearchView = Backbone.View.extend({
     });
     newComic.save();
     this.model.fetch();
-    this.flashMessage('comic added. number of comics in deck: ' + this.model.attributes.num_comics);
+    this.flashMessage(this.model.attributes.num_comics);
   },
 
   nextOrPreviousResults: function(event) {
@@ -98,14 +98,8 @@ app.SearchView = Backbone.View.extend({
   },
 
   // Todo: use Bootstrap notify
-  flashMessage: function(message) {
-    var $myTextMessage = $('<h1/>').css("display", "none");
-    this.$el.prepend($myTextMessage);
-    $myTextMessage.text(message);
-    $myTextMessage.slideDown(function() {
-      setTimeout(function() {
-          $myTextMessage.slideUp();
-      }, 2000);
-    });
+  flashMessage: function(numComics) {
+    var message = "Comic Added! " + numComics + " comics in collection."
+    $.growl.notice({ message: message , location: 'br' });
   }
 });
