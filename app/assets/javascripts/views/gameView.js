@@ -80,6 +80,7 @@ app.GameView = Backbone.View.extend({
         // Stuff to do if there is a match
         self.numMatchedCards += 2;
         self.numClicks = 0;
+        self.enlargeCard();
       } else {
         // Stuff to do if there is no match
         setTimeout(function(){
@@ -105,6 +106,25 @@ app.GameView = Backbone.View.extend({
   unapplyClickedState: function (el) {
     el.removeClass('clicked');
     el.css('cursor','pointer');
+  },
+
+  enlargeCard: function() {
+    // Get absolute position of first card
+    var offset = self.$firstCard.offset();
+    var posY = offset.top - $(window).scrollTop();
+    var posX = offset.left - $(window).scrollLeft(); 
+
+    $image = (self.$firstCard.find('img')).clone();
+    $image.css({
+        position: 'absolute',
+        top:      posY,
+        left:     posX - 5
+      }
+    );
+
+    this.$el.append($image);
+
+
   }
 });
 
