@@ -114,19 +114,32 @@ app.GameView = Backbone.View.extend({
     var posY = offset.top - $(window).scrollTop();
     var posX = offset.left - $(window).scrollLeft(); 
 
-    $image = (self.$firstCard.find('img')).clone();
+    var $image = (self.$firstCard.find('img')).clone();
     $image.css({
-        position: 'absolute',
-        top:      posY,
-        left:     posX,
-        width:   '133px'
-      }
-    );
+      position: 'absolute',
+      top:       posY,
+      left:      posX,
+      width:     '133px',
+      'z-index': 2
+    });
+
+    // Dimming element darkens the screen other than the enlarged image
+    var $dimmingElement = $('<div/>').addClass('background').css({
+      'background-color': 'black',
+      'z-index': 1
+    });
 
     this.$el.append($image);
-    TweenLite.to($image, 0.5, {left: (window.innerWidth - $image.width())/2, top: (window.innerHeight - $image.height())/2});
+    this.$el.append($dimmingElement);
+
+    TweenLite.to($image, 0.5, {left: (window.innerWidth - $image.width())/2,
+                               top: (window.innerHeight - $image.height())/2,
+                               delay: 0.5
+                              });
     // TweenMax.set($image, {transformOrigin:'0 0'});
-    tween = TweenLite.to($image, 0.25, {scale: 0.95 * window.innerHeight/$image.height(), ease:Sine.easeIn, delay: 0.5});
+    tween = TweenLite.to($image, 0.25, {scale: 0.95 * window.innerHeight/$image.height(),
+                                        ease:Sine.easeIn,
+                                        delay: 1});
 
   }
 });
