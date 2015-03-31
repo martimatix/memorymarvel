@@ -78,7 +78,7 @@ app.GameView = Backbone.View.extend({
       if (this.$firstCard.attr('data-comicID') === $(event.currentTarget).attr('data-comicID')) {
         // Stuff to do if there is a match
         this.numMatches++;
-        // this.unbindClick(this.$firstCard);
+        self.numClicks = 0;
       } else {
         // Stuff to do if there is no match
         setTimeout(function(){
