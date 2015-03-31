@@ -20,6 +20,4 @@
 //= require_tree ./views
 //= require_tree ./router
 //= require_tree ./helpers
-//= require 'greensock/TweenLite'
-//= require 'greensock/easing/EasePack'
 //= require_tree .
