@@ -106,7 +106,7 @@ app.SearchView = Backbone.View.extend({
 
   nextOrPreviousResults: function(event) {
     event.preventDefault();
-    var nextOrPrevious = $(event.target).attr('id');
+    var nextOrPrevious = $(event.target).attr('id');r
     if (nextOrPrevious === 'next') {
       this.pageNumber += 1;
       this.renderImages();
