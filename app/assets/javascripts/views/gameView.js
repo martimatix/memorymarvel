@@ -116,41 +116,42 @@ app.GameView = Backbone.View.extend({
     var posY = offset.top - $(window).scrollTop();
     var posX = offset.left - $(window).scrollLeft(); 
 
-    var $image = (self.$firstCard.find('img')).clone();
-    $image.css({
+    this.$matchedComic = (self.$firstCard.find('img')).clone();
+    this.$matchedComic.css({
       position: 'absolute',
       top:       posY,
       left:      posX,
       width:     '133px',
       'z-index': 3
     });
-    $image.addClass('enlarged');
+    this.$matchedComic.addClass('enlarged');
 
     // Dimming element darkens the screen other than the enlarged image
-    var $dimmingElement = $('<div/>').addClass('background').css({
+    this.$dimmingElement = $('<div/>').addClass('background').css({
       'background-color': 'black',
       'z-index': 2
     });
-    $dimmingElement.addClass('dimmer');
+    this.$dimmingElement.addClass('dimmer');
 
-    this.$el.append($image);
-    this.$el.append($dimmingElement);
+    this.$el.append(this.$matchedComic);
+    this.$el.append(this.$dimmingElement);
 
-    // Dim screen and cards
-    TweenMax.set($dimmingElement,{opacity:0});
-    TweenMax.to($dimmingElement, 2, {opacity:0.7});
-    TweenMax.to([this.$firstCard, this.$secondCard], 2, {opacity:0});
+    // Dim screen and second card
+    TweenMax.set(this.$dimmingElement,{opacity:0});
+    TweenMax.set(this.$firstCard,{opacity:0});
+    TweenMax.to(this.$dimmingElement, 2, {opacity:0.7});
+    TweenMax.to(this.$secondCard, 2, {opacity:0});
 
     // Translate image to centre of screen
-    TweenLite.to($image, 0.5, {
-      left: (window.innerWidth - $image.width())/2,
-      top: (window.innerHeight - $image.height())/2,
+    TweenLite.to(this.$matchedComic, 0.5, {
+      left: (window.innerWidth - this.$matchedComic.width())/2,
+      top: (window.innerHeight - this.$matchedComic.height())/2,
       delay: 0.5
     });
 
     // Enlarge image
-    TweenLite.to($image, 0.25, {
-      scale: 0.95 * window.innerHeight/$image.height(),
+    TweenLite.to(this.$matchedComic, 0.25, {
+      scale: 0.95 * window.innerHeight/this.$matchedComic.height(),
       ease:Sine.easeIn,
       delay: 1
     });
@@ -158,8 +159,13 @@ app.GameView = Backbone.View.extend({
   },
 
   discardCard: function () {
-    $('.enlarged').remove();
-    $('.dimmer').remove();
+    var self = this;
+    TweenMax.to(this.$dimmingElement, 0.7, {opacity:0});
+    TweenLite.to(this.$matchedComic, 0.7, {left:window.innerWidth * 1.2, ease:Back.easeIn});
+    setTimeout( function () {
+      self.$dimmingElement.remove();
+      self.$matchedComic.remove();      
+    }, 700);
   } 
 });
 
