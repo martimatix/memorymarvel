@@ -69,9 +69,8 @@ app.GameView = Backbone.View.extend({
       this.$firstCard = $(event.currentTarget);
       this.applyClickedState(this.$firstCard);
       TweenLite.to(this.$firstCard.find(".card"), 1, {rotationY:180, ease:Back.easeOut});
-
     // if it's the second click out of two (turning the second card)
-    } else if (this.numClicks === 2 && !$(event.currentTarget).hasClass('clicked')) {
+    } else if (this.numClicks > 1 && !$(event.currentTarget).hasClass('clicked')) {
       TweenLite.to($(event.currentTarget).find(".card"), 1, {rotationY:180, ease:Back.easeOut});
       this.applyClickedState($(event.currentTarget));
       // Check if we have a match
