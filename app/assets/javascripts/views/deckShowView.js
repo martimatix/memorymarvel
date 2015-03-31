@@ -7,6 +7,7 @@ app.DeckShowView = Backbone.View.extend({
   events: {
     'click .comic-cover': 'removeComicFromDeck'
   },
+  okToDelete: true,
   render: function () {
     var deckShowViewTemplate = $('#deckShowView-template').html();
     var deckShowViewHTML = _.template(deckShowViewTemplate);
@@ -30,14 +31,20 @@ app.DeckShowView = Backbone.View.extend({
   },
 
   removeComicFromDeck: function(event) {
-    var comicID = $(event.target).attr('data-comicID'); 
-    var comic = this.comics.find({
-      id: parseInt(comicID)
-    });
-    var self = this;
-    // Not a true destroy - only deletes the association to the deck
-    comic.destroy().done( function () {
-      self.render();
-    });
+    self = this;
+    // `okToDelete` variable created because otherwise quick deletes could mess up the collection
+    // Think of it as a debounce
+    if (this.okToDelete) {
+      this.okToDelete = false;
+      var comicID = $(event.target).attr('data-comicID'); 
+      var comic = this.comics.find({
+        id: parseInt(comicID)
+      });
+      // Not a true destroy - only deletes the association to the deck
+      comic.destroy().done( function () {
+        $(event.target).remove();
+        self.okToDelete = true;
+      });
+    }
   }
 });
