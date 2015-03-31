@@ -10,7 +10,8 @@ var app = app || {};
 app.GameView = Backbone.View.extend({
   el: '#main', // define the selector which this view is associated with
   events: {
-    'click .cardWrapper': 'flipCard'
+    'click .cardWrapper': 'flipCard',
+    'click .enlarged' : 'discardCard'
   },
   flipped: false,
   numClicks: 0,
@@ -123,12 +124,14 @@ app.GameView = Backbone.View.extend({
       width:     '133px',
       'z-index': 3
     });
+    $image.addClass('enlarged');
 
     // Dimming element darkens the screen other than the enlarged image
     var $dimmingElement = $('<div/>').addClass('background').css({
       'background-color': 'black',
       'z-index': 2
     });
+    $dimmingElement.addClass('dimmer');
 
     this.$el.append($image);
     this.$el.append($dimmingElement);
@@ -152,6 +155,11 @@ app.GameView = Backbone.View.extend({
       delay: 1
     });
 
+  },
+
+  discardCard: function () {
+    $('.enlarged').remove();
+    $('.dimmer').remove();
   } 
 });
 
