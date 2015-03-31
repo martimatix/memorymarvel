@@ -7,16 +7,18 @@
     <% end %>
   </ol>
 <% end %>
-<%= form_for @user do |f| %>
-  <div class="form-group">
-    <%= f.label :name %>
-    <%= f.text_field :name, :autofocus => true, :required => true, :class => 'form-control' %>
-    <%= f.label :email %>
-    <%= f.text_field :email, :class => 'form-control' %>
-    <%= f.label :password %>
-    <%= f.password_field :password, :class => 'form-control' %>
-    <%= f.label :password_confirmation %>
-    <%= f.password_field :password_confirmation, :class => 'form-control' %>
-  </div>
-  <%= f.submit "Sign Up", :class => 'btn btn-success' %>
-<% end %>
+<div class="col col-6">
+  <%= form_for @user do |f| %>
+    <div class="form-group">
+      <%= f.label :name %>
+      <%= f.text_field :name, :autofocus => true, :required => true, :class => "block full-width field-light" %>
+      <%= f.label :email %>
+      <%= f.text_field :email, :class => "block full-width field-light" %>
+      <%= f.label :password %>
+      <%= f.password_field :password, :class => "block full-width field-light" %>
+      <%= f.label :password_confirmation %>
+      <%= f.password_field :password_confirmation, :class => "block full-width field-light" %>
+    </div>
+    <%= f.submit "Sign Up", :class => "button" %>
+  <% end %>
+</div>
