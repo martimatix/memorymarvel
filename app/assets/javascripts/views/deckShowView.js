@@ -26,6 +26,7 @@ app.DeckShowView = Backbone.View.extend({
         $comicCover.attr('data-comicID', comicID);
         $comicCover.attr('src', image_path + '/portrait_xlarge.jpg');
         self.$el.append($comicCover);
+        self.updateInfoMessage();
       });
     });
   },
@@ -41,10 +42,23 @@ app.DeckShowView = Backbone.View.extend({
         id: parseInt(comicID)
       });
       // Not a true destroy - only deletes the association to the deck
-      comic.destroy().done( function () {
-        $(event.target).remove();
-        self.okToDelete = true;
-      });
+      comic.destroy({success: function () {
+        self.comics.fetch().done( function () {
+          $(event.target).remove();
+          self.okToDelete = true;
+          self.updateInfoMessage();   
+        });
+      }}); 
     }
+  },
+
+  updateInfoMessage: function () {
+    var infoMessage;
+    if (this.comics.length > 0) {
+      infoMessage = 'You can discard a comic by clicking on it.'
+    } else {
+      infoMessage = 'You have no comics in this deck.'
+    }
+    $('#info-message').text(infoMessage);
   }
 });

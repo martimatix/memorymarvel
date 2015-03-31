@@ -11,6 +11,7 @@
 
   <template id="deckView-template">
     <h2>Available Decks</h2>
+    <a href="#decks/new">New Deck</a>
     <table>
       <tr>
         <th>Title</th>
@@ -39,7 +40,7 @@
   <template id="deckShowView-template">
     <h1>Viewing the deck: {{ title }}</h1>
     <p><a href="#/decks/{{ id }}/search">Add comics to this deck</a></p>
-    <h2>You can discard a comic by clicking on it.</h2>
+    <h2 id="info-message"></h2>
   </template>
 
   <template id="searchView-template">
