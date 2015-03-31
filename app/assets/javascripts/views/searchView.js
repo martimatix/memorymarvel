@@ -4,16 +4,22 @@ app.SearchView = Backbone.View.extend({
   el: '#main', // define the selector which this view is associated with
   pageNumber: 0, // page number for search results
   resultsPerPage: 8,
+  cardLimit: 6,
+  // okToAdd is like a debounce
+  okToAdd: true,
   events: {
     'click #search': 'processSearchQuery',
     'click .comic-cover': 'addComicToDeck',
     'click .turn-page': 'nextOrPreviousResults'
   },
   render: function () {
-    var searchViewTemplate = $('#searchView-template').html();
-    var searchViewHTML = _.template(searchViewTemplate);
-    // debugger
-    this.$el.html(searchViewHTML(this.model.toJSON()));
+    var self = this;
+    this.model.fetch().done( function () {
+      var searchViewTemplate = $('#searchView-template').html();
+      var searchViewHTML = _.template(searchViewTemplate);
+      // debugger
+      self.$el.html(searchViewHTML(self.model.toJSON())); 
+    });
   },
 
   processSearchQuery: function (event) {
@@ -72,17 +78,30 @@ app.SearchView = Backbone.View.extend({
   },
 
   addComicToDeck: function(event) {
-    var counter = $(event.target).attr('data-counter'); // counter is the position of this comic in this.responseJSON
-    var comicInfoObject = this.responseJSON[counter];
-    var newComic = new app.Comic({
-      marvel_id: comicInfoObject.id,
-      title: comicInfoObject.title,
-      image_url: comicInfoObject.thumbnail.path,
-      deck_id: this.model.get('id')
-    });
-    newComic.save();
-    this.model.fetch();
-    this.flashMessage(this.model.attributes.num_comics);
+    var self = this;
+    debugger;
+    if (this.model.attributes.num_comics >= this.cardLimit) {
+      $.growl.warning({ message: "Cannot add card. You are at the card limit." , location: 'br' });
+      return
+    }
+    if (this.okToAdd) {
+      this.okToAdd = false;
+      var counter = $(event.target).attr('data-counter'); // counter is the position of this comic in this.responseJSON
+      var comicInfoObject = this.responseJSON[counter];
+      var newComic = new app.Comic({
+        marvel_id: comicInfoObject.id,
+        title: comicInfoObject.title,
+        image_url: comicInfoObject.thumbnail.path,
+        deck_id: this.model.get('id')
+      });
+      newComic.save().done( function () {
+        self.model.fetch().done ( function () {
+          var numComics = self.model.attributes.num_comics;
+          self.flashMessage("Comic Added! " + numComics + " comics in collection.");  
+          self.okToAdd = true;
+        });
+      });
+    }
   },
 
   nextOrPreviousResults: function(event) {
@@ -98,8 +117,7 @@ app.SearchView = Backbone.View.extend({
   },
 
   // Todo: use Bootstrap notify
-  flashMessage: function(numComics) {
-    var message = "Comic Added! " + numComics + " comics in collection."
-    $.growl.notice({ message: message , location: 'br' });
+  flashMessage: function(message) {
+    $.growl.notice({ message: message , location: 'br', notice: 'Card Added!' });
   }
 });

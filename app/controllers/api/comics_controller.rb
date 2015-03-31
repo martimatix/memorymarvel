@@ -47,7 +47,9 @@ class Api::ComicsController < ApplicationController
   def destroy
     deck = Deck.find_by :id => params[:deck_id]
     deck.comics.delete(comic)
-    respond_with comic
+    deck.num_comics = deck.comics.count
+    deck.save
+    respond_with deck
   end
 
   private
