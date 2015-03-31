@@ -120,28 +120,34 @@ app.GameView = Backbone.View.extend({
       top:       posY,
       left:      posX,
       width:     '133px',
-      'z-index': 2
+      'z-index': 3
     });
 
     // Dimming element darkens the screen other than the enlarged image
     var $dimmingElement = $('<div/>').addClass('background').css({
       'background-color': 'black',
-      'z-index': 1
+      'z-index': 2
     });
 
     this.$el.append($image);
     this.$el.append($dimmingElement);
 
+    // Dim screen
+    TweenMax.set($dimmingElement,{opacity:0});
+    TweenMax.to($dimmingElement,2, {opacity:0.7});
+
+    // Translate image to centre of screen
     TweenLite.to($image, 0.5, {left: (window.innerWidth - $image.width())/2,
                                top: (window.innerHeight - $image.height())/2,
                                delay: 0.5
                               });
-    // TweenMax.set($image, {transformOrigin:'0 0'});
-    tween = TweenLite.to($image, 0.25, {scale: 0.95 * window.innerHeight/$image.height(),
+
+    // Enlarge image
+    TweenLite.to($image, 0.25, {scale: 0.95 * window.innerHeight/$image.height(),
                                         ease:Sine.easeIn,
                                         delay: 1});
 
-  }
+  } 
 });
 
 
