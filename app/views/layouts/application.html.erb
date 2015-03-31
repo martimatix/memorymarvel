@@ -11,6 +11,7 @@
 
   <nav class="clearfix white bg-black">
     <div class="sm-col">
+      <%= link_to('Home', root_path, :class => "button py2 button-transparent") %>
       <% @current_user = User.find_by :id => session[:user_id] %>
       <% if @current_user.present? %>
         <p class="button py2 button-transparent"><%= ('Logged in as ' + @current_user.name) %></p>
