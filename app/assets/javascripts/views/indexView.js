@@ -12,7 +12,7 @@ app.IndexView = Backbone.View.extend({
 
     $.get( "/front_page_images.json", function( data ) {
       _.each(data, function(image_url) {
-        $('.background').append($('<img>').attr('src', image_url))
+        $('.background').append($('<img>').addClass('front-page-img').attr('src', image_url))
       });
     });
 

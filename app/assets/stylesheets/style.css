@@ -5,6 +5,8 @@
   width: 110%; 
   height: 110%;
   z-index: -1;
+  font-size: 0;
+  background-color: black;
 }
 
 .suggestions {
