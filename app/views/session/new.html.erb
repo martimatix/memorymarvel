@@ -1,21 +1,23 @@
-<h2>
-  <%= flash[:error] if flash[:error].present? %>
-</h2>
-<h1>Log in</h1>
-<%= form_tag login_path do %>
-<p>
-  <%= label_tag :name %>
-  <%= text_field_tag :name, nil, :autofocus => true %>
-</p>
-<p>
-  <%= label_tag :password %>
-  <%= password_field_tag :password %>
-</p>
-<p>
-  <%= submit_tag "Login" %>
-  <% end %>
-</p>
-          
+<div class="col col-6">
+  <h2>
+    <%= flash[:error] if flash[:error].present? %>
+  </h2>
+  <h1>Log in</h1>
+
+  <%= form_tag login_path do %>
+  <p>
+    <%= label_tag :name %>
+    <%= text_field_tag :name, nil, :autofocus => true, :class => "block full-width field-light" %>
+  </p>
+  <p>
+    <%= label_tag :password %>
+    <%= password_field_tag :password, nil, :class => "block full-width field-light" %>
+  </p>
+  <p>
+    <%= submit_tag "Login", :class => "button" %>
+    <% end %>
+  </p>
+</div>   
 
 
 
