@@ -1,7 +1,6 @@
 var app = app || {};
 
 app.decks = new app.Decks();
-app.users = new app.Users();
 app.currentUser = new app.CurrentUser();
 
 $(document).ready(function() {
@@ -16,9 +15,8 @@ $(document).ready(function() {
     interpolate: /\{\{(.+?)\}\}/g
   };
 
-  app.users.fetch();
 
-  // app.currentUser.fetch();
+  app.currentUser.fetch();
 
   app.decks.fetch().done(function () {
       // This is global so we access it inside certain views.
