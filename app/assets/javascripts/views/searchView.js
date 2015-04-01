@@ -79,7 +79,6 @@ app.SearchView = Backbone.View.extend({
 
   addComicToDeck: function(event) {
     var self = this;
-    debugger;
     if (this.model.attributes.num_comics >= this.cardLimit) {
       $.growl.warning({ message: "Cannot add card. You are at the card limit." , location: 'br' });
       return

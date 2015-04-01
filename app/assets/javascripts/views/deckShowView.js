@@ -11,7 +11,6 @@ app.DeckShowView = Backbone.View.extend({
   render: function () {
     // Check if current user is the creator of this deck
     this.okToEdit = this.model.get('user_id') === app.currentUser.get('id');
-    debugger;
 
     var deckShowViewTemplate = $('#deckShowView-template').html();
     var deckShowViewHTML = _.template(deckShowViewTemplate);
@@ -26,6 +25,8 @@ app.DeckShowView = Backbone.View.extend({
     }
 
     this.comics = new app.Comics({deck_id: this.model.get('id')});
+    this.updateInfoMessage();
+
 
     var self = this;
 
@@ -69,7 +70,7 @@ app.DeckShowView = Backbone.View.extend({
 
   updateInfoMessage: function () {
     var infoMessage;
-    if (this.comics.length === 0) {
+    if (this.model.get('num_comics') === 0) {
       infoMessage = 'There are no comics in this deck.'
     } else if (this.okToEdit) {
       infoMessage = 'You can discard a comic by clicking on it.'
