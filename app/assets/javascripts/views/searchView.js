@@ -93,10 +93,17 @@ app.SearchView = Backbone.View.extend({
         image_url: comicInfoObject.thumbnail.path,
         deck_id: this.model.get('id')
       });
+      // Store number of comics before the fetch
+      var numComicsBeforeFetch = self.model.attributes.num_comics;
       newComic.save().done( function () {
         self.model.fetch().done ( function () {
           var numComics = self.model.attributes.num_comics;
-          self.flashMessage("Comic Added! " + numComics + " comics in collection.");  
+          // If the number is unchanged, it means that the comic was already in the collection
+          if (numComicsBeforeFetch === numComics) {
+            $.growl.warning({ message: "Cannot add card. It is already in the deck." , location: 'br' });
+          } else {
+            self.flashMessage("Comic Added! " + numComics + " comics in the deck.");  
+          }
           self.okToAdd = true;
         });
       });
