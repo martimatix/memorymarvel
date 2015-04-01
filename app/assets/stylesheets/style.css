@@ -1,5 +1,13 @@
 @import url(http://fonts.googleapis.com/css?family=Lobster);
 
+.memory-cover {
+  font-family: 'Lobster', cursive;
+  font-size: 160px;
+  margin-top: 0px;
+  padding-top: 0px;
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
+}
+
 .background {
   position: fixed; 
   top: 0%; 
