@@ -198,7 +198,7 @@ app.GameView = Backbone.View.extend({
 
   optionsAfterGameOver: function (thisGameID) {
     setTimeout( function () {
-      TweenMax.to([$('.background'), $('#bg'), $('.game-over-message')], 3, {opacity:0});
+      // TweenMax.to([$('.background'), $('#bg'), $('.game-over-message')], 3, {opacity:0});
       $.get( "/get_deck.json", function( randomID ) {
         var gameOverOptionsTemplate = $('#optionsAfterGameOver-template').html();
         var gameOverOptionsHTML = _.template(gameOverOptionsTemplate);
@@ -206,8 +206,10 @@ app.GameView = Backbone.View.extend({
           "this_game_id": thisGameID,
           "random_id": randomID
         }));
+        TweenLite.set(".game-over-options", {opacity:0});
+        TweenMax.to($(".game-over-options"), 1, {opacity:1});
       });
-    }, 4000);
+    }, 2000);
   } 
 });
 
