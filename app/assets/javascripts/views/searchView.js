@@ -13,11 +13,14 @@ app.SearchView = Backbone.View.extend({
     'click .turn-page': 'nextOrPreviousResults'
   },
   render: function () {
+    // Preload image
+    this.$loadingImage = $('#loading-template').html();
+
+
     var self = this;
     this.model.fetch().done( function () {
       var searchViewTemplate = $('#searchView-template').html();
       var searchViewHTML = _.template(searchViewTemplate);
-      // debugger
       self.$el.html(searchViewHTML(self.model.toJSON())); 
     });
   },
@@ -60,8 +63,7 @@ app.SearchView = Backbone.View.extend({
       return
     }
     $loadingMessage = $('<h1/>').text('Searching Marvel Database');
-    $loadingImage = $('#loading-template').html();
-    $('.search-results').append($loadingMessage).append($loadingImage);
+    $('.search-results').append($loadingMessage).append(this.$loadingImage);
 
     var marvelUrl = 'http://gateway.marvel.com:80/v1/public/comics?';
 

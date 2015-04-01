@@ -18,6 +18,9 @@ app.GameView = Backbone.View.extend({
   numClicks: 0,
   numMatchedCards: 0,
   render: function () {
+    // Preload image
+    this.$gameOverBackgroundImg = $('#victory-template').html();
+
     var gameViewHTML = $('#gameView-template').html();
     this.$el.html(gameViewHTML);
     this.$el.append($('<div/>').addClass('background'));
@@ -178,9 +181,8 @@ app.GameView = Backbone.View.extend({
 
       // Apply the game over background image
       $gameOverBackgroundDiv = $('<div/>').attr('id', 'bg');
-      $gameOverBackgroundImg = $('#victory-template').html();
 
-      $gameOverBackgroundDiv.append($gameOverBackgroundImg);
+      $gameOverBackgroundDiv.append(self.$gameOverBackgroundImg);
       self.$el.prepend($gameOverBackgroundDiv);
       TweenMax.to($('.background'), 3, {opacity:0});
 
