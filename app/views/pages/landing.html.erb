@@ -106,6 +106,16 @@
     </div>
   </template>
 
+  <!-- Hack to get around asset pipeline issues -->
+
+  <template id="victory-template">
+    <img src="<%= asset_path 'victory.jpg' %>">
+  </template>
+
+  <template id="loading-template">
+    <img src="<%= asset_path 'loading_image.gif' %>">
+  </template>
+
 
 
 

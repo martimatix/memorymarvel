@@ -178,7 +178,7 @@ app.GameView = Backbone.View.extend({
 
       // Apply the game over background image
       $gameOverBackgroundDiv = $('<div/>').attr('id', 'bg');
-      $gameOverBackgroundImg = $('<img>').attr('src', 'assets/victory.jpg');
+      $gameOverBackgroundImg = $('#victory-template').html();
 
       $gameOverBackgroundDiv.append($gameOverBackgroundImg);
       self.$el.prepend($gameOverBackgroundDiv);

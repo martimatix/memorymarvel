@@ -60,7 +60,7 @@ app.SearchView = Backbone.View.extend({
       return
     }
     $loadingMessage = $('<h1/>').text('Searching Marvel Database');
-    $loadingImage = $('<img>').attr('src', 'assets/loading_image.gif')
+    $loadingImage = $('#loading-template').html();
     $('.search-results').append($loadingMessage).append($loadingImage);
 
     var marvelUrl = 'http://gateway.marvel.com:80/v1/public/comics?';
