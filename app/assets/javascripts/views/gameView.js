@@ -93,10 +93,6 @@ app.GameView = Backbone.View.extend({
           self.numClicks = 0;
        }, 1500);
       }
-      // Check for game over condition
-      if (this.comics.length === this.numMatches) {
-        // Do stuff when the game is over
-      }
     }
   },
   applyClickedState: function (el) {
@@ -155,17 +151,30 @@ app.GameView = Backbone.View.extend({
       ease:Sine.easeIn,
       delay: 1
     });
-
   },
 
   discardCard: function () {
     var self = this;
-    TweenMax.to(this.$dimmingElement, 0.7, {opacity:0});
-    TweenLite.to(this.$matchedComic, 0.7, {left:window.innerWidth * 1.2, ease:Back.easeIn});
+    TweenMax.to([this.$dimmingElement,this.$matchedComic], 0.5, {opacity:0});
+    TweenLite.to(this.$matchedComic, 0.5, {scale:0, ease:Sine.easeIn});
     setTimeout( function () {
       self.$dimmingElement.remove();
-      self.$matchedComic.remove();      
-    }, 700);
+      self.$matchedComic.remove();
+      // Check for game over condition
+      if (self.comics.length === self.numMatchedCards/2) {
+        self.gameOverAnimation();
+      }     
+    }, 500);
+  },
+
+  gameOverAnimation: function () {
+    $gameOverMessage = $('<h1/>').text('Congratulations!');
+    this.$el.prepend($gameOverMessage);
+    var tl = new TimelineMax({repeat:3, repeatDelay:1, yoyo:true});    
+    tl.from($gameOverMessage, 0.5, {left:'-=60px', ease:Back.easeOut})
+    .staggerFrom($gameOverMessage, 0.1, {alpha:0}, 0.02, "textEffect")
+    .staggerFrom($gameOverMessage, 0.8, {rotationY:"-270deg", top:"100px", transformOrigin: "50% 50% -80", ease:Back.easeOut}, 0.02, "textEffect")
+    .staggerTo($gameOverMessage, 0.6, {rotationX:"+=360deg", transformOrigin:"50% 50% 10", color:"#FFF"}, 0.02);
   } 
 });
 
