@@ -11,6 +11,7 @@ app.DeckShowView = Backbone.View.extend({
   render: function () {
     // Check if current user is the creator of this deck
     this.okToEdit = this.model.get('user_id') === app.currentUser.get('id');
+    debugger;
 
     var deckShowViewTemplate = $('#deckShowView-template').html();
     var deckShowViewHTML = _.template(deckShowViewTemplate);

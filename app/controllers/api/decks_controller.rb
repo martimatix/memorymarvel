@@ -28,7 +28,7 @@ class Api::DecksController < ApplicationController
   end
 
   def deck_params
-    params.require(:deck).permit(:title, :num_comics)
+    params.require(:deck).permit(:title, :num_comics, :user_id)
   end
 
 end
