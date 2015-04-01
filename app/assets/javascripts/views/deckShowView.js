@@ -9,10 +9,16 @@ app.DeckShowView = Backbone.View.extend({
   },
   okToDelete: true,
   render: function () {
+    console.log(app.currentUser);
     var deckShowViewTemplate = $('#deckShowView-template').html();
     var deckShowViewHTML = _.template(deckShowViewTemplate);
 
     this.$el.html(deckShowViewHTML(this.model.toJSON()));
+    var pathToAddComics = '#/decks/' + this.model.get('id') + '/search';
+    var $linkToAddComics = $('<a/>').attr('href', pathToAddComics);
+    $linkToAddComics.text('Add comics to this deck');
+    $('.options').append($linkToAddComics);
+
 
     this.comics = new app.Comics({deck_id: this.model.get('id')});
 

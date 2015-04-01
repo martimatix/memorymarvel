@@ -40,8 +40,9 @@
 
   <template id="deckShowView-template">
     <h1>Viewing the deck: {{ title }}</h1>
-    <p><a href="#/decks/{{ id }}/game">Play game with deck</a></p>
-    <p><a href="#/decks/{{ id }}/search">Add comics to this deck</a></p>
+    <div class="options">
+      <p><a href="#/decks/{{ id }}/game">Play game with deck</a></p>
+    </div>
     <h2 id="info-message"></h2>
   </template>
 
