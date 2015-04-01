@@ -16,12 +16,15 @@ app.DeckShowView = Backbone.View.extend({
     var deckShowViewHTML = _.template(deckShowViewTemplate);
 
     this.$el.html(deckShowViewHTML(this.model.toJSON()));
-    var pathToAddComics = '#/decks/' + this.model.get('id') + '/search';
-    var $linkToAddComics = $('<a/>').attr('href', pathToAddComics);
-    $linkToAddComics.text('Add comics to this deck');
 
-    if (this.okToEdit) {
-      $('.options').append($linkToAddComics);
+    // If current user is not the owner of this deck, hide link to add comics
+    if (!this.okToEdit) {
+      $('#add-comics').remove();
+    }
+
+    // If there are no comics, hide link to the game
+    if (this.model.get('num_comics') === 0) {
+      $('#play-comics').remove();
     }
 
     this.comics = new app.Comics({deck_id: this.model.get('id')});
