@@ -20,6 +20,8 @@ app.GameView = Backbone.View.extend({
     var gameViewHTML = $('#gameView-template').html();
     this.$el.html(gameViewHTML);
     this.$el.append($('<div/>').addClass('background'));
+    TweenLite.set(".background", {opacity:0});
+    TweenMax.to($('.background'), 1, {opacity:1});
     this.startGame();
   },
   startGame: function () {
