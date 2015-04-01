@@ -1,3 +1,5 @@
+@import url(http://fonts.googleapis.com/css?family=Lobster);
+
 .background {
   position: fixed; 
   top: 0%; 
@@ -61,7 +63,8 @@
 }
 
 .game-over-message {
-  color: yellow;
+  font-family: 'Lobster', cursive;
+  color: cyan;
   font-size: 100px;
   text-align: center;
   text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.8);
@@ -85,5 +88,12 @@
   margin: auto; 
   min-width: 50%;
   min-height: 50%;
+}
+
+.memory-card-back {
+  font-family: 'Lobster', cursive;
+  text-align: center;
+  color: white;
+  font-size: 2em;
 }
 

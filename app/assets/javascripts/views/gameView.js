@@ -114,7 +114,7 @@ app.GameView = Backbone.View.extend({
     var posY = offset.top - $(window).scrollTop();
     var posX = offset.left - $(window).scrollLeft(); 
 
-    this.$matchedComic = (self.$firstCard.find('img')).clone();
+    this.$matchedComic = (self.$firstCard.find('.comicSide')).clone();
     this.$matchedComic.css({
       position: 'absolute',
       top:       posY,
