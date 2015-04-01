@@ -13,4 +13,13 @@ class PagesController < ApplicationController
     end
   end
 
+  # Method to get a random deck with six images
+  def get_deck
+    # get games with at 6 comics
+    decks = Deck.where ("num_comics = 6")
+    respond_to do |format|
+      format.json { render :json => decks.sample.id }
+    end
+  end
+
 end

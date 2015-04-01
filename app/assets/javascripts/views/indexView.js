@@ -4,6 +4,9 @@ var app = app || {};
 // Responsible for showing data on the page, but also allowing interaction.
 app.IndexView = Backbone.View.extend({
   el: '#main', // define the selector which this view is associated with
+  events: {
+    'click .button-big': 'newGame',
+  },
   render: function () {
     var indexViewHTML = $('#indexView-template').html();
     this.$el.html(indexViewHTML);
@@ -17,6 +20,12 @@ app.IndexView = Backbone.View.extend({
     });
 
     $playNowButton = $('.button-big');
-    TweenMax.to($playNowButton,1,{rotation:360,ease:Linear.easeNone, delay: 5});
+    TweenMax.to($playNowButton,3,{rotation:360, ease:Back.easeInOut, delay: 5});
+  },
+  newGame: function (event) {
+    event.preventDefault();
+    $.get( "/get_deck.json", function( deck_id ) {
+      app.appRouter.navigate('decks/' + deck_id +'/game', true);
+    });
   }
 });
