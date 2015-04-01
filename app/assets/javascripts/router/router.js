@@ -4,6 +4,7 @@ app.AppRouter = Backbone.Router.extend({
   routes: {
     '' : 'index',
     'decks' : 'listDecks',
+    'decks/my_decks' : 'myDecks',
     'decks/new' : 'newDeck',
     'decks/:id' : 'showDeck',
     'decks/:id/search' : 'searchForComics',
@@ -21,6 +22,13 @@ app.AppRouter = Backbone.Router.extend({
     app.currentView && app.currentView.unbind() && app.currentView.remove();
     $('<div id="main"></div>').prependTo('#main-container')
     app.currentView = new app.DeckView({collection: app.decks});
+    app.currentView.render();
+  },
+
+  myDecks: function () {
+    app.currentView && app.currentView.unbind() && app.currentView.remove();
+    $('<div id="main"></div>').prependTo('#main-container')
+    app.currentView = new app.myDeckView({collection: app.decks});
     app.currentView.render();
   },
 

@@ -15,6 +15,7 @@
       <% @current_user = User.find_by :id => session[:user_id] %>
       <%= link_to('Browse Decks', root_path(:anchor => "decks"), :class => "button py2 button-transparent") %>
       <% if @current_user.present? %>
+        <%= link_to('My Decks', root_path(:anchor => "decks/my_decks"), :class => "button py2 button-transparent") %>
         <%= link_to('New Deck', root_path(:anchor => "decks/new"), :class => "button py2 button-transparent") %>
       <% end %>
     </div>
