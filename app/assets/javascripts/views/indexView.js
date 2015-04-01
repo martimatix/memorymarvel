@@ -16,6 +16,7 @@ app.IndexView = Backbone.View.extend({
       });
     });
 
-
+    $playNowButton = $('.button-big');
+    TweenMax.to($playNowButton,1,{rotation:360,ease:Linear.easeNone, delay: 5});
   }
 });
