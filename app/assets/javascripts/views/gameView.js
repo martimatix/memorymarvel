@@ -57,6 +57,7 @@ app.GameView = Backbone.View.extend({
     _.each(this.gameCards, function ($card) {
       $card.appendTo(self.$el);
     });
+    $('.front').css('background-image', 'url("assets/card_texture.jpg")');
   },
   initializeGreenSock: function () {
     TweenLite.set(".cardWrapper", {perspective:800});

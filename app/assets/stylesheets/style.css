@@ -52,7 +52,7 @@
 }
 
 .front{
-  background-color:red;
+  background-color: red;
   border-radius: 10px;
   border: 2px solid white;
 }
@@ -60,6 +60,7 @@
 .back{
   background-color:#333; 
   border-radius: 10px;
+  border: 2px solid white;
 }
 
 .game-over-message {
@@ -93,7 +94,7 @@
 .memory-card-back {
   font-family: 'Lobster', cursive;
   text-align: center;
-  color: white;
+  color: #F7F4EF;
   font-size: 2em;
 }
 
