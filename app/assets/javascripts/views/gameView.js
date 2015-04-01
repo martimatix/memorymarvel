@@ -11,7 +11,8 @@ app.GameView = Backbone.View.extend({
   el: '#main', // define the selector which this view is associated with
   events: {
     'click .cardWrapper': 'flipCard',
-    'click .enlarged' : 'discardCard'
+    'click .enlarged' : 'discardCard',
+    'click a#replay' : 'refreshPage'
   },
   flipped: false,
   numClicks: 0,
@@ -210,6 +211,12 @@ app.GameView = Backbone.View.extend({
         TweenMax.to($(".game-over-options"), 1, {opacity:1});
       });
     }, 2000);
+  },
+
+  refreshPage: function (event) {
+    event.preventDefault();
+    Backbone.history.loadUrl(Backbone.history.fragment);
+    return false;
   } 
 });
 
