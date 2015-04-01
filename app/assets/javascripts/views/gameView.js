@@ -173,6 +173,9 @@ app.GameView = Backbone.View.extend({
   gameOverAnimation: function () {
     var self = this;
     setTimeout( function () {
+      // Remove card wrappers as we will be appending things to the main div
+      $('.cardWrapper').remove();
+
       // Apply the game over background image
       $gameOverBackgroundDiv = $('<div/>').attr('id', 'bg');
       $gameOverBackgroundImg = $('<img>').attr('src', 'assets/victory.jpg');
@@ -184,13 +187,27 @@ app.GameView = Backbone.View.extend({
       // Game over message
       $gameOverMessage = $('<p/>').text('Congratulations!').addClass('game-over-message');
       self.$el.prepend($gameOverMessage);
-      var tl = new TimelineMax({repeat:2, repeatDelay:1, yoyo:true});    
+      var tl = new TimelineMax({yoyo:true});    
       tl.from($gameOverMessage, 0.5, {left:'-=60px', ease:Back.easeOut})
       .staggerFrom($gameOverMessage, 0.1, {alpha:0}, 0.02, "textEffect")
       .staggerFrom($gameOverMessage, 0.8, {rotationY:"-270deg", top:"100px", transformOrigin: "50% 50% -80", ease:Back.easeOut}, 0.02, "textEffect")
       .staggerTo($gameOverMessage, 0.6, {rotationX:"+=360deg", transformOrigin:"50% 50% 10", color:"#FFF"}, 0.02);
+      self.optionsAfterGameOver(self.model.get('id'));
     }, 1000);
-  
+  },
+
+  optionsAfterGameOver: function (thisGameID) {
+    setTimeout( function () {
+      TweenMax.to([$('.background'), $('#bg'), $('.game-over-message')], 3, {opacity:0});
+      $.get( "/get_deck.json", function( randomID ) {
+        var gameOverOptionsTemplate = $('#optionsAfterGameOver-template').html();
+        var gameOverOptionsHTML = _.template(gameOverOptionsTemplate);
+        $('#main').append(gameOverOptionsHTML({
+          "this_game_id": thisGameID,
+          "random_id": randomID
+        }));
+      });
+    }, 4000);
   } 
 });
 
