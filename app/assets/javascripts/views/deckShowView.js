@@ -22,8 +22,10 @@ app.DeckShowView = Backbone.View.extend({
       $('#add-comics').remove();
     }
 
+    this.numComics = this.model.get('num_comics')
+
     // If there are no comics, hide link to the game
-    if (this.model.get('num_comics') === 0) {
+    if (this.numComics === 0) {
       $('#play-comics').remove();
     }
 
@@ -66,6 +68,7 @@ app.DeckShowView = Backbone.View.extend({
       comic.destroy({success: function () {
         $(event.target).remove();
         self.okToDelete = true;
+        self.numComics--;
         self.updateInfoMessage();   
       }}); 
     }
@@ -73,8 +76,9 @@ app.DeckShowView = Backbone.View.extend({
 
   updateInfoMessage: function () {
     var infoMessage;
-    if (this.model.get('num_comics') === 0) {
+    if (this.numComics === 0) {
       infoMessage = 'There are no comics in this deck.'
+      $('#play-comics').remove();
     } else if (this.okToEdit) {
       infoMessage = 'You can discard a comic by clicking on it.'
     }

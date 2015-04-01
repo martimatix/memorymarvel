@@ -26,6 +26,12 @@ class Api::ComicsController < ApplicationController
     # Establish associations
     deck = Deck.find_by :id => comic_params[:deck_id]
 
+    # Validate that the current user is the owner of the deck
+    @current_user = User.find_by :id => session[:user_id]
+    if @current_user.id != deck.user_id
+      return
+    end
+
     # Check to see if the deck already has this comic
     comic_in_deck = deck.comics.find_by :marvel_id => this_comic_id
 
@@ -46,6 +52,11 @@ class Api::ComicsController < ApplicationController
   # Not a true destroy - only deletes association with the deck
   def destroy
     deck = Deck.find_by :id => params[:deck_id]
+    @current_user = User.find_by :id => session[:user_id]
+    if @current_user.id != deck.user_id
+      return
+    end
+
     deck.comics.delete(comic)
     deck.num_comics = deck.comics.count
     deck.save
