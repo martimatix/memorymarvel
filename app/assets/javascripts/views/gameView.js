@@ -168,9 +168,9 @@ app.GameView = Backbone.View.extend({
   },
 
   gameOverAnimation: function () {
-    $gameOverMessage = $('<h1/>').text('Congratulations!');
+    $gameOverMessage = $('<p/>').text('Congratulations!').addClass('game-over-message');
     this.$el.prepend($gameOverMessage);
-    var tl = new TimelineMax({repeat:3, repeatDelay:1, yoyo:true});    
+    var tl = new TimelineMax({repeat:2, repeatDelay:1, yoyo:true});    
     tl.from($gameOverMessage, 0.5, {left:'-=60px', ease:Back.easeOut})
     .staggerFrom($gameOverMessage, 0.1, {alpha:0}, 0.02, "textEffect")
     .staggerFrom($gameOverMessage, 0.8, {rotationY:"-270deg", top:"100px", transformOrigin: "50% 50% -80", ease:Back.easeOut}, 0.02, "textEffect")
