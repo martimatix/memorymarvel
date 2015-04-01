@@ -9,7 +9,9 @@ app.DeckShowView = Backbone.View.extend({
   },
   okToDelete: true,
   render: function () {
-    console.log(app.currentUser);
+    // Check if current user is the creator of this deck
+    this.okToEdit = this.model.get('user_id') === app.currentUser.get('id');
+
     var deckShowViewTemplate = $('#deckShowView-template').html();
     var deckShowViewHTML = _.template(deckShowViewTemplate);
 
@@ -17,8 +19,10 @@ app.DeckShowView = Backbone.View.extend({
     var pathToAddComics = '#/decks/' + this.model.get('id') + '/search';
     var $linkToAddComics = $('<a/>').attr('href', pathToAddComics);
     $linkToAddComics.text('Add comics to this deck');
-    $('.options').append($linkToAddComics);
 
+    if (this.okToEdit) {
+      $('.options').append($linkToAddComics);
+    }
 
     this.comics = new app.Comics({deck_id: this.model.get('id')});
 
@@ -38,6 +42,11 @@ app.DeckShowView = Backbone.View.extend({
   },
 
   removeComicFromDeck: function(event) {
+    // Exit function if user does not own this deck
+    if (!this.okToEdit) {
+      return
+    }
+
     self = this;
     // `okToDelete` variable created because otherwise quick deletes could mess up the collection
     // Think of it as a debounce
@@ -59,10 +68,10 @@ app.DeckShowView = Backbone.View.extend({
 
   updateInfoMessage: function () {
     var infoMessage;
-    if (this.comics.length > 0) {
+    if (this.comics.length === 0) {
+      infoMessage = 'There are no comics in this deck.'
+    } else if (this.okToEdit) {
       infoMessage = 'You can discard a comic by clicking on it.'
-    } else {
-      infoMessage = 'You have no comics in this deck.'
     }
     $('#info-message').text(infoMessage);
   }
