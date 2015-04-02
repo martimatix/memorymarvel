@@ -1,12 +1,8 @@
 # Memory Marvel
 
----
-
 [Live Demo](http://memorymarvel.herokuapp.com/)
 
 Play the game of concentration with comic covers from Marvel.
-
----
 
 ## Technologies
 
