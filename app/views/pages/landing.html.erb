@@ -1,7 +1,7 @@
 <div id="main"></div>
 
   <template id="indexView-template">
-    <header class="center px3 py4 white bg-cover bg-center">
+    <header class="center px3 white bg-cover bg-center">
       <p class="memory-cover">Memory</p>
       <p><img src="<%= asset_path 'marvel_logo.png' %>"></p>
       <a href="#" class="h3 button button-big mb4">Play Now!</a>
@@ -28,8 +28,8 @@
   </template>
 
   <template id="newDeckView-template">
-    <h1>New Deck</h1>
-    <form>
+    <h1 class="px2">New Deck</h1>
+    <form class="px2">
       <div>
         <label for="deck-title">Give a name for your new deck:</label><br>
         <input id="deck-title" type="text" class="mb0 field-light">
@@ -44,7 +44,7 @@
       <p><a id="add-comics" href="#/decks/{{ id }}/search">Add comics to deck</a></p>
       <p><a id="play-comics" href="#/decks/{{ id }}/game">Play game with deck</a></p>
     </div>
-    <h2 id="info-message"></h2>
+    <h2 class="px2" id="info-message"></h2>
   </template>
 
   <template id="searchView-template">

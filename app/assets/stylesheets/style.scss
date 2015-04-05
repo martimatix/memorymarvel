@@ -116,26 +116,26 @@
 
 @media (min-width: 480px) and (max-width: 640px) {
 
-.memory-cover {
-  font-size: 120px;
-}
-
-.front-page-img {
-  height: 25%;
-  width: 25%;
-}
-
-}
-
-@media (min-width: 0px) and (max-width: 480px) {
-
 .suggestions {
   visibility: hidden;
   height: 0;
 }
 
 .memory-cover {
-  font-size: 80px;
+  font-size: 120px;
+}
+
+.front-page-img {
+  height: 15%;
+  width: 15%;
+}
+
+}
+
+@media (min-width: 0px) and (max-width: 480px) {
+
+.memory-cover {
+  font-size: 100px;
 }
 
 .front-page-img {

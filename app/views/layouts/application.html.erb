@@ -8,7 +8,7 @@
   <%= csrf_meta_tags %>
   <meta name="description" content="Play concentration with Marvel comic covers.">
   <meta name="keywords" content="Marvel Comics Concentration Game">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+  <meta name="viewport" content="width=device-width, initial-scale=0.7"/>
 </head>
 <body>
 
@@ -22,7 +22,7 @@
         <%= link_to('New Deck', root_path(:anchor => "decks/new"), :class => "button py2 button-transparent") %>
       <% end %>
     </div>
-    <div class="sm-col-right">
+    <div class="sm-col-right right-align">
       <% if @current_user.present? %>
         <p class="button py2 button-transparent"><%= ('Logged in as ' + @current_user.name) %></p>
         <%= link_to('Logout', login_path, :method => :delete, :class => "button py2 button-transparent") %>
